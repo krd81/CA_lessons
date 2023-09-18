@@ -1,0 +1,33 @@
+div {
+    border-radius: 50%;
+  
+   }
+   
+   #one{
+     background-color: orange;
+     width: 250px;
+     height: 250px;
+     border: solid 25px red;
+   }
+   
+   .two{
+    background-color: green;
+     width: 150px;
+     height: 150px;
+     border: solid 25px yellow;
+     position: relative;
+     left: 50px;
+     bottom: 250px;
+   }
+   
+
+   .three{
+   background-color: rebeccapurple;
+     width: 50px;
+     height: 50px;
+     border: solid 25px royalblue;  
+     position: relative;
+     left: 100px;
+     bottom: 400px;
+   }
+   
