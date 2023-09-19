@@ -1,27 +1,40 @@
-html, body{
+* {
   font-size: 50px;
+ /* box-sizing: border-box;*/
 }
+
+
+html, body{
+  width: 600px;
+  height: 600px;
+}
+
 
 div {
     border-radius: 50%;
-    display: flex;
+
    }
    
    #one{
      background-color: orange;
-     width: 20rem;
-     height: 20rem;
-     border: solid 2rem red;
+     width: 10rem;
+     height: 10rem;
+     max-width: 600px;
+     max-height: 600px;
+     border: solid 1rem red;
       }
    
    .two{
     background-color: green;
-     width: 12rem;
-     height: 12rem;
-     border: solid 2rem yellow;
+     width: 6rem;
+     height: 6rem;
+     border: solid 1rem yellow;
      position: relative;
-     left: 4rem;
-     bottom: 20rem;
+     left: 2rem;
+     bottom: 10rem;
+
+     max-width: 400px;
+     max-height: 400px;
    }
    
 
@@ -32,8 +45,57 @@ div {
      border: solid 1rem royalblue;  
     
      position: relative;
-     left: 8rem;
-     bottom: 32rem;
+     left: 4rem;
+     bottom: 16rem;
+     max-width: 200px;
+     max-height: 200px;
+
     
    }
    
+
+   /*
+#one{
+     background-color: orange;
+     width: 10rem;
+     height: 10rem;
+     max-width: 600px;
+     max-height: 600px;
+     border: solid 1rem red;
+      }
+   
+   .two{
+    background-color: green;
+     width: 6rem;
+     height: 6rem;
+     border: solid 1rem yellow;
+     position: relative;
+     left: 2rem;
+     bottom: 10rem;
+
+     max-width: 400px;
+     max-height: 400px;
+   }
+   
+
+   .three{
+   background-color: rebeccapurple;
+     width: 2rem;
+     height: 2rem;
+     border: solid 1rem royalblue;  
+    
+     position: relative;
+     left: 4rem;
+     bottom: 16rem;
+   
+
+     max-width: 200px;
+     max-height: 200px;
+    
+   }
+
+
+
+
+
+   */
