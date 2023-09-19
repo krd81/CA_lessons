@@ -1,35 +1,39 @@
+html, body{
+  font-size: 50px;
+}
+
 div {
     border-radius: 50%;
-  
+    display: flex;
    }
    
    #one{
      background-color: orange;
-     width: 500px;
-     height: 500px;
-     border: solid 50px red;
+     width: 20rem;
+     height: 20rem;
+     border: solid 2rem red;
       }
    
    .two{
     background-color: green;
-     width: 300px;
-     height: 300px;
-     border: solid 50px yellow;
+     width: 12rem;
+     height: 12rem;
+     border: solid 2rem yellow;
      position: relative;
-     left: 100px;
-     bottom: 500px;
+     left: 4rem;
+     bottom: 20rem;
    }
    
 
    .three{
    background-color: rebeccapurple;
-     width: 100px;
-     height: 100px;
-     border: solid 50px royalblue;  
+     width: 2rem;
+     height: 2rem;
+     border: solid 1rem royalblue;  
     
      position: relative;
-     left: 200px;
-     bottom: 800px;
+     left: 8rem;
+     bottom: 32rem;
     
    }
    
