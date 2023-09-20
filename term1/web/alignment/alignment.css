@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+div{
+    width: 70%;
+    height: 100px;
+    margin: 1rem;
+    border: 2px solid red;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    /* Use flex-direction to change the main axis from horizontal to vertical
+    flex-direction: column;
+    */
+}
+
+button{
+/*font-size: 1rem;*/
+/* flex: 1;  <--- This makes each button the same size and fills the container */
+line-height: 1.5;
+width: 15%;
+}
+
+button:nth-of-type(2){
+    align-self: flex-start;
+    /* order: 1; <--- Changes the order of the items within the container */
+}
