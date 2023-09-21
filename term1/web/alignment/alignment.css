@@ -10,7 +10,7 @@ div{
     margin: 1rem;
     border: 2px solid red;
     justify-content: space-between;
-    align-items: center;
+    align-items:;
     display: flex;
     /* Use flex-direction to change the main axis from horizontal to vertical
     flex-direction: column;

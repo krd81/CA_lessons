@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+div{
+    width: 100px;
+    height: 100px;
+    
+    
+    background: salmon;
+    transition: transform ease-in-out 2s, background-color ease-in-out 3s;
+    
+    
+    
+}
+
+div:hover {
+    /*width: 200px;*/
+    /* height: 200px;
+    background-color: aqua; */
+    transform: rotate(45deg);
+    animation: colorful-text 2s infinite;
+}
+
+@keyframes colorful-text{
+    0% { background: salmon; }
+
+    25% { background: yellow; }
+
+    50%{ background: blue;  }
+
+    75% { background: yellow; }
+
+    100% { background: salmon; }
+}
+
+@keyframes colorful-text1{
+    from { background: salmon; }
+
+
+    to{ background: blue; 
+    }
+}
