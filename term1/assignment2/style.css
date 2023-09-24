@@ -1,0 +1,23 @@
+/*This is a generic style sheet which is used by all of the HTML files in this project
+It contains basic layouts common to all pages and font styling, sizing, colouring etc 
+Specific styling required by individual pages is located in that page's specific css file.*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   color: coral;
+}
+
+body {
+    background: rgb(204, 240, 246)  url(./images/background2.jpg);
+    background-size: 200vh;
+   background-position: auto;
+    
+  
+}
+
+
+

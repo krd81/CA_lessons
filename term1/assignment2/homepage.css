@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+
+header{
+    background-color: rgba(91, 109, 127, 0.5);
+    min-height: 5vh;
+    min-width: 130vw;
+}
+
+section{
+    position: relative;
+    left: 25vh;
+    padding-top: 10vh;
+}
+
+h1 {
+    text-align: center;
+    margin: 5vh 0;
+}
+
+h2 {
+    text-align: center;
+}
