@@ -7,13 +7,15 @@ Specific styling required by individual pages is located in that page's specific
     margin: 0;
     border: 0;
 
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
-   color: coral;
+    font-family: 'Gayathri', sans-serif;
+    
+   
+   color: rgb(55, 92, 114);
 }
 
 body {
-    background: rgb(204, 240, 246)  url(./images/background2.jpg);
-    background-size: 200vh;
+    background: rgb(223, 222, 222)  url(./images/geo-background-1.jpg);
+    background-size: 100vh;
    background-position: auto;
     
   
