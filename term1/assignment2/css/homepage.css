@@ -42,8 +42,8 @@ h2 {
 section:last-of-type {
     display: flex;
     flex-direction: row;
-    position: absolute;
-    bottom: -45vh;
+    position: relative;
+    
     background-color: rgba(91, 109, 127, 0.5);
     min-height: 25vh;
     padding: 0;

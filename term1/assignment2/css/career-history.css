@@ -9,12 +9,6 @@ section {
     padding: 3vh;
 }
 
-img {
-   
-    max-width: 45vw;
-
-}
-
 h2{
     margin: 2vh 0;
 }
@@ -25,18 +19,14 @@ p{
 
 }
 
-figure{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 2vh 0;
-    
+ulist{
+    line-height: 1.5;
+    margin-top: 2vh;
+    margin-left: 5vh;
 }
 
-figcaption{
-    margin-top: 2vh;
-    max-width: 45vw;
-
+h2:hover{
+    color: aqua;
 }
 
 @media only screen and (min-width: 400px){
