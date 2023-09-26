@@ -21,17 +21,6 @@ body {
   
 }
 
-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    background-color: rgba(91, 109, 127, 0.5);
-    min-height: 5vh;
-    padding: 0;
- 
-}
 
 nav{
     display: flex;
@@ -41,6 +30,7 @@ nav{
     text-align: center;
     background-color: rgba(91, 109, 127, 0.5);
     min-height: 5vh;
+    max-height: 10vh;
     padding: 0;
  
 }
@@ -51,7 +41,14 @@ div{
    
 }
 
-div:hover{
+nav>div {
+    min-height: 5vh;
+    max-height: 10vh;
+    
+    padding: 2vh 15px;
+}
+
+nav>div:hover {
     background-color: dimgrey;
     color: whitesmoke;
     
