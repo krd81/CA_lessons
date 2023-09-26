@@ -17,7 +17,9 @@ h2{
     border-top: 1px solid black;
     min-height: 7vh;
     font-size: 3vh;
-    background-color: rgba(256,256,256, 0.6);
+    background-color: #04AA6D;
+    color: white;
+   /* background-color: rgba(256,256,256, 0.6); */
     padding: 2vh 5vh;
     
     text-wrap: wrap ;
@@ -48,9 +50,9 @@ h2{
 
 /*Applies transition effect to heading on hover*/
 .skills:hover .category {
-    background-color: rgb(126, 197, 245);
+    background-color: rgb(256, 256, 256);
     text-align: center;
-    color: black;
+    color: #04AA6D;
 }
 
 /*Optional: effects on hovering list items*/
