@@ -4,20 +4,24 @@ body{
     align-items: center;
 }
 
+h2 {
+    margin-top: 2vh;
+}
 
-section{
+
+
+.blog-post{
+    
+    display: flex;
+    flex-direction: column;
+    max-width: 345px;
+    background-color: rgb(189, 226, 231);
+    padding: 1vh;
+    border: 3px solid navy;
+    box-shadow: 5px 5px rgb(164, 144, 144);
     margin: 2vh;
 }
 
-.blog-post{
-    display: flex;
-    flex-direction: column;
-    width: max(50vw, 345px);
-    background-color: rgb(154, 196, 184);
-    padding: 1vh;
-    border: 1px solid red;
-    box-shadow: 5px 5px rgb(164, 144, 144);
-}
 
 .image{
     display: flex;
@@ -33,40 +37,132 @@ img {
     justify-content: center;
 }
 
+section>div:last-of-type{
+    display: flex;
+    justify-content: center;
+
+}
+
 .post-category{
+    font-family: 'Antonio', sans-serif;
+    font-weight: 500;
     color: rgb(164, 144, 144);
-    font-weight: bolder;
+    font-size: 1.5rem;
 }
 
 .date, sup{
+    font-family: 'Antonio', sans-serif;
+    font-weight: 100;
     color: rgb(164, 144, 144);
     font-size: small;
 }
 
 .title {
+    font-family: 'Antonio', sans-serif;
+    font-weight: 100;
     color: black;
-    font-size: larger;
+    font-size: 1.2rem;
 }
 
 
 button{
     border: 1px solid black;
-    border-radius: 3px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 5px;
+   
+    
+    font-family: 'Antonio', sans-serif;
+    font-weight: 500;
+    font-size: larger;
+    
     min-height: 4vh;
-    max-height: 15px;
-    background-color: red;
-    color: black;
+    max-height:max-content;
+ 
+    background-color: navy;
+    color: white;
+
     text-align: center;
     padding: 4px 7px;
     box-shadow: 2px 2px rgb(164, 144, 144);
 }
 
-@media only screen and (min-width: 400px){
+@media only screen and (min-width: 400px) and (max-width: 849px){
+    .blog-post{
+                max-width: 450px;
+       
+       
+    }
 
+    .post-category, h2 {
+       font-size: 2rem;
+    }
+    
+    .date, sup {
+        font-size: 1.3rem;
+    }
+    
+    .title {
+        font-size: 1.6rem;
+    }
 
-@media only screen and (min-width: 850px){
 
 
 }
+
+@media only screen and (min-width: 850px) {
+    article {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+       
+    }
+    
+    article>section:last-of-type {
+        /*visibility: hidden;*/
+        display: flex;
+        
+        position: absolute;
+        
+        align-self: flex-end;
+        align-content: flex-end;
+        /*align-items: start;  
+        flex-direction: column; THIS PROPERTY IS ALIGNING THE CONTENT OF THE LAST BLOG TO THE LEFT */
+        justify-items: left;
+        justify-content: left;
+        background-color: red;
+       
+    }
+    
+
+
+    #blog-1, #blog-2 {
+        flex: 2;
+        min-height: 50vh;
+    }
+    
+    .blog-post{
+        
+        max-width: 300px;
+
+
+    }
+
+    img{
+        max-width: 250px;
+    }
+
+.post-category, h2 {
+font-size: 2rem;
+}
+
+.date, sup {
+font-size: 1.3rem;
+}
+
+.title {
+font-size: 1.6rem;
+}
+
+
+
 }

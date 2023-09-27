@@ -7,3 +7,6 @@ Background attribution: Image by Image by <a href="https://www.freepik.com/free-
 <a target="_blank" href="https://icons8.com/icon/16318/github">GitHub</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 <a target="_blank" href="https://icons8.com/icon/k5TOe_wo6JDZ/envelope">Email</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+
+<a href="https://www.freepik.com/free-vector/vegan-friendly-leaves-label-green-color_8413173.htm#query=vegan%20logo&position=8&from_view=keyword&track=ais">Image by starline</a> on Freepik
