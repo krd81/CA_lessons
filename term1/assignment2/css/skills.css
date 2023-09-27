@@ -11,6 +11,7 @@ h2{
 .skills {
     position: relative;
     display: block;
+    max-width: 540px;
 }
 
 .category {
@@ -73,25 +74,37 @@ h2{
 
 
 
-
-
-
 li {
     list-style: square; 
-    font-size: 2.2vh;
+    font-size: 2vh;
  
 }
 
 ul>p {
+    margin-top: 15px;
     padding: -10px  ;
-    font-size: 2.2vh;
+    font-size: 2vh;
+    color:#04AA6D ;
     }
 
-@media only screen and (min-width: 400px){
 
+em {
+    font-size: smaller;
+    font-style: normal;
+}
+
+
+@media only screen and (min-width: 400px){
+    .skills {
+        min-width: 540px;
+        
+        }
+    }
 
 @media only screen and (min-width: 850px){
+    .skills {
+    min-width: 600px;
+    
+    }
 
-
-}
 }
