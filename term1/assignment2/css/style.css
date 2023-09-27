@@ -83,13 +83,18 @@ img {
 
 
 @media only screen and (min-width: 400px){
-    *{
-        
+    p, nav{
+        font-size: 1.3rem;
+    }
+    
+    body {
+        align-items: center;
     }
     
     
-    p, nav{
-        font-size: 1.3rem;
+    nav {
+        padding: 0 5vw;
+        align-self: stretch;
     }
     
    
@@ -100,5 +105,15 @@ img {
         font-size: 1.3rem;
     }
     
+    body {
+        align-items: center;
+    }
+
+
+    nav {
+        padding: 0 5vw;
+        align-self: stretch;
+    }
+
 }
 

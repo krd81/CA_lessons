@@ -1,6 +1,7 @@
 body{
     display: flex;
     flex-direction: column;
+   
 }
 
 section {    
@@ -50,18 +51,24 @@ p, figcaption {
 
 }
 
+/*desktop view shows the images next to each other and with the content centred on the page*/
 @media only screen and (min-width: 850px){
-    h2 {
+       h2 {
         font-size: 2rem
     }
     
-    p, figcaption {
-        font-size: 1.1rem;
+    p {
+        font-size: 1.2rem;
+    }
+
+    figcaption {
+        font-size: 0.9rem;
     }
     
     img {
    
-        max-width: 25vw;
+        max-width: 250px;
+
     
     }
 
@@ -71,6 +78,11 @@ p, figcaption {
         
         margin: 2vh 0;
         
+    }
+
+    section{
+        align-items: center;
+        max-width: 650px;
     }
 
     section:last-of-type {

@@ -10,7 +10,7 @@ section {
 }
 
 h2{
-    margin: 2vh 0;
+    margin-bottom: 2vh;
 }
 
 p{
@@ -25,15 +25,26 @@ ulist{
     margin-left: 5vh;
 }
 
-h2:hover{
-    color: aqua;
-}
 
 @media only screen and (min-width: 400px){
-
-
-@media only screen and (min-width: 850px){
+    section{        
+        max-width: 650px;
+    }
+    
+    p, li {
+        font-size: 1.2rem;
+    }
 
 
 }
+
+@media only screen and (min-width: 850px){
+    section{        
+        max-width: 650px;
+    }
+    
+    p, li {
+        font-size: 1.2rem;
+    }
+
 }
