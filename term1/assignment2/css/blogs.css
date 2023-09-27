@@ -117,18 +117,11 @@ button{
        
     }
     
+    /*HIDES THE LAST SECTION, WHICH IS A DUMMY POST*/
     article>section:last-of-type {
-        /*visibility: hidden;*/
-        display: flex;
-        
-        position: absolute;
-        
-        align-self: flex-end;
-        align-content: flex-end;
-        /*align-items: start;  
-        flex-direction: column; THIS PROPERTY IS ALIGNING THE CONTENT OF THE LAST BLOG TO THE LEFT */
-        justify-items: left;
-        justify-content: left;
+        visibility: hidden;
+        display: flex; 
+        position: relative;
         background-color: red;
        
     }
