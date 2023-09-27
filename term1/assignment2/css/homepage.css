@@ -6,7 +6,6 @@ body{
 }
 
 
-
 section{
     display: flex;
     flex-direction: column;
@@ -26,12 +25,38 @@ h1 {
     font-size: 400%;
 }
 
+#header-section {
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+}
+
+.banner{
+    position:relative ;
+    z-index: -1;
+    border: 0;
+    margin: 0;
+    max-width: 100vw;
+    min-height: 40vh;
+    border-radius: 0;
+     /* ADDED AS PART OF OFF CENTRE PROFILE FOR MOBILE DEVICES*/
+    right: 0;
+}
+
+
+
 img {
-    position: relative;
+   position: absolute;
+  
+    /* ADDED TO MOVE PROFILE IMAGE OFF CENTRE FOR MOBILE DEVICES*/
+    right: 45vw;
+    
+
     margin: 2vh;
-    border: 2px solid black;
-    padding: 10px;
-    size: 10vh;
+    border: 1px solid black;
+
+    max-width: 20vh;
+    border-radius: 100px;
 }
 
 h2 {
@@ -42,13 +67,52 @@ h2 {
 section:last-of-type {
     display: flex;
     flex-direction: row;
+   justify-content: space-between;
     position: relative;
     
     background-color: rgba(91, 109, 127, 0.5);
-    min-height: 25vh;
-    padding: 0;
-    /*min-width: 130vw;*/
+    min-height: 10vh;
+    
+    min-width: 100vw;
 
 }
 
 
+
+.logo {
+    width: 5vh;
+    height: 5vh;
+    margin: 0 50px;
+    border: 0;
+    right: 0;
+}
+
+.tooltip{
+    position: relative;
+    display: inline-block;
+    
+}
+
+.tooltip .show-number{
+    visibility: hidden;
+    width: 120px;
+    background-color:rgba(64, 195, 81, 1);
+    color: white;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 6px;
+    padding: 9px;
+    z-index: 1;
+    position: absolute;
+    top: 25%;
+    left: 1px;
+    
+    /* USE THESE SETTINGS FOR LARGER SCREENS
+    position: absolute;
+    top: 25%;
+    */
+}
+
+.tooltip:hover .show-number {
+    visibility: visible;
+}
