@@ -39,29 +39,24 @@ h1 {
     max-width: 100vw;
     min-height: 40vh;
     border-radius: 0;
-     /* ADDED AS PART OF OFF CENTRE PROFILE FOR MOBILE DEVICES*/
-    right: 0;
+    
 }
 
 
 
 img {
    position: absolute;
-  
-    /* ADDED TO MOVE PROFILE IMAGE OFF CENTRE FOR MOBILE DEVICES*/
-    right: 45vw;
-    
-
+      
     margin: 2vh;
     border: 1px solid black;
 
-    max-width: 20vh;
+    max-width: 18vh;
     border-radius: 100px;
 }
 
 h2 {
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 4vh;
 }
 
 section:last-of-type {
@@ -115,4 +110,45 @@ section:last-of-type {
 
 .tooltip:hover .show-number {
     visibility: visible;
+}
+
+/*REQUIRED TO SHOW THE PROFILE IMAGE OFF-CENTRE 
+ON SMALLER DEVICES*/
+@media only screen and (max-width: 399px){
+    .banner{
+       right: 0;
+    }
+    img {
+       right: 45vw;
+    }
+
+   
+
+}
+
+
+@media only screen and (min-width: 400px){
+    .banner{
+        right: 0;
+     }
+     img {
+        right: 45vw;
+     }
+
+     h1{
+        margin-bottom: 2vh;
+    }
+
+
+}
+
+
+@media only screen and (min-width: 850px){
+    h1{
+        margin-bottom: 2vh;
+    }
+
+
+
+
 }
