@@ -93,6 +93,12 @@ em {
     font-style: normal;
 }
 
+footer{
+    position: absolute ;
+    bottom: -40px;
+
+}
+
 
 @media only screen and (min-width: 400px){
     .skills {

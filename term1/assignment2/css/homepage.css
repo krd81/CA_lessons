@@ -62,22 +62,26 @@ h2 {
 section:last-of-type {
     display: flex;
     flex-direction: row;
-   justify-content: space-between;
+    justify-content: space-around;
     position: relative;
+    
+
     
     background-color: rgba(91, 109, 127, 0.5);
     min-height: 10vh;
     
     min-width: 100vw;
-
+    
 }
 
 
 
+
 .logo {
+    position: relative;
     width: 5vh;
     height: 5vh;
-    margin: 0 50px;
+    margin: 0;
     border: 0;
     right: 0;
 }
