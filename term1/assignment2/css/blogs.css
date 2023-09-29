@@ -9,11 +9,11 @@ h2 {
 }
 
 
-
-.blog-post{
-    
+/* Manages the layout and appearance of each section specified by the class 'blog-post'*/ 
+.blog-post{    
     display: flex;
     flex-direction: column;
+    
     max-width: 345px;
     background-color: rgb(189, 226, 231);
     padding: 1vh;
@@ -30,17 +30,20 @@ h2 {
 }
 
 img {
-    border: 0;
-    border-radius: 0;
     max-width: min(40vw , 400px);
     min-width: 200px;
     justify-content: center;
 }
 
-section>div:last-of-type{
-    display: flex;
+/* Ensures the button is displayed in the centre of its container 
+flex property used to control the flex-grow basis of this section - so that regardless of the blog container growing based on the flexible layout, the button will always be positioned the bottom of the post*/
+section>div:last-of-type{    
+    display: grid;
+    position: relative;
     justify-content: center;
-
+    align-items: end;
+    flex: 1 0 auto;
+   
 }
 
 .post-category{
@@ -64,14 +67,6 @@ section>div:last-of-type{
     font-size: 1.2rem;
 }
 
-/*ATTEMPT TO MOVE BUTTON TO THE BOTTOM OF THE POST
-section>div:last-of-type {
-    position: sticky;
-    bottom: 0px;
-    
-    background-color: red;
-}
-*/
 
 button{
     border: 1px solid black;
@@ -83,31 +78,22 @@ button{
     font-size: larger;
     
     min-height: 4vh;
-    max-height:max-content;
+    max-height: 20px;
  
     background-color: navy;
     color: white;
 
     text-align: center;
+
     padding: 4px 7px;
     box-shadow: 2px 2px rgb(164, 144, 144);
 }
 
-/*HIDES THE LAST SECTION, WHICH IS A DUMMY POST
-article>section:last-of-type {
-    visibility: hidden;
-    display: flex; 
-    position: relative;
-    background-color: red;
-   
-}  */
 
 
 @media only screen and (min-width: 400px) and (max-width: 849px){
     .blog-post{
-        max-width: 450px;
-       
-       
+        max-width: 450px;       
     }
 
     .post-category, h2 {
@@ -122,10 +108,9 @@ article>section:last-of-type {
         font-size: 1.6rem;
     }
 
-
-
 }
 
+/* DESKTOP responsive display ensures the blogs are laid out in 2 columns rather than the flex display allowing any number to be displayed across the available width of the screen */
 @media only screen and (min-width: 850px) {
     article {
         display: flex;
@@ -134,26 +119,21 @@ article>section:last-of-type {
         flex-wrap: wrap;
         margin: 2rem 5rem;
         max-width: 850px;
-    }
-    
-
+    } 
 
     img{
         max-width: 250px;
     }
 
-.post-category, h2 {
-font-size: 2rem;
-}
+    .post-category, h2 {
+    font-size: 2rem;
+    }
 
-.date, sup {
-font-size: 1.3rem;
-}
+    .date, sup {
+    font-size: 1.3rem;
+    }
 
-.title {
-font-size: 1.6rem;
-}
-
-
-
+    .title {
+    font-size: 1.6rem;
+    }
 }

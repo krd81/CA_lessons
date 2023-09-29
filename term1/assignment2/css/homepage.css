@@ -24,15 +24,11 @@ h1 {
     text-align: center;
     margin: 5vh 0 0 0;
     font-weight: 700;
-    font-size: 400%;
+    font-size: 400%;    
 }
 
-#header-section {
-    display: flex;
-    justify-content: center;
-    align-items:flex-start;
-}
 
+/*ID used to target the background image on the homepage, controlling the positioning ensuring it fills the screen and z-index to allow the profile picture to be in front*/
 #banner{
     position: static;
     z-index: -1;
@@ -45,7 +41,7 @@ h1 {
 }
 
 
-
+/*ID also used for the profile image so that specific styling can be applied to this element*/
 #profile {
    position: absolute;
       
@@ -61,13 +57,15 @@ h2 {
     margin-top: 4vh;
 }
 
-/*use section:last-of-type to target the paragraph before social media icons*/
+
+/*use section:last-of-type to target the paragraph before social media icons and ensure it has a maximum width on wide screens*/
 
 section:last-of-type{
-    max-width: 850px;
+        max-width: 850px;
  }
 
 
+/*Styling for the social media/contacts banner, managing the layout, colour and positioning */
 aside {
     display: flex;
     flex-direction: row;
@@ -85,23 +83,22 @@ aside {
 
 
 
-
+/* The remaining css statements are to manage the social media icons, in particular their size and the spacing between them*/
 .logo {
     position: relative;
     width: 5vh;
     height: 5vh;
-    margin: 0 2vw;
-    border: 0;
-    right: 0;
+    margin: 0 2vw;   
 }
 
-.tooltip{
+/* tooltip & show-number IDs are to allow a phone number floating element to appear when hovering on the "whatsapp" icon*/
+#tooltip{
     position: relative;
     display: inline-block;
     
 }
 
-.tooltip .show-number{
+#tooltip #show-number{
     visibility: hidden;
     width: 90px;
     background-color:rgba(64, 195, 81, 1);
@@ -118,29 +115,23 @@ aside {
 
 }
 
-.tooltip:hover .show-number {
+#tooltip:hover #show-number {
     visibility: visible;
 }
 
 /*REQUIRED TO SHOW THE PROFILE IMAGE OFF-CENTRE 
 ON SMALLER DEVICES*/
 @media only screen and (max-width: 399px){
-    #banner{
-       right: 0;
-    }
+ 
     #profile {
        right: 45vw;
-    }
-
-   
+    }  
 
 }
 
-
+/*TABLET media breakpoint - controlling the response for font sizing and positioning of elements*/
 @media only screen and (min-width: 400px) and (max-width: 849px){
-    #banner{
-        right: 0;
-     }
+ 
      #profile {
         right: 55vw;
         border-width: 3px;
@@ -158,7 +149,9 @@ ON SMALLER DEVICES*/
 
 }
 
-
+/*DESKTOP media breakpoint controlling the response for font sizing and positioning of elements
+Also an adjustment is applied for the tooltip ID (the floating phone number) adjusting its position to the right
+where there is more space on a larger screen*/
 @media only screen and (min-width: 850px){
     h1{
         margin-bottom: 2vh;
@@ -168,9 +161,7 @@ ON SMALLER DEVICES*/
         right: 55vw;
         border-width: 3px;
         width: 20%;
-     }
-
-     
+     }     
 
 
      aside {
@@ -179,7 +170,7 @@ ON SMALLER DEVICES*/
      }
 
 
-     .tooltip .show-number{
+     #tooltip #show-number{
         position: relative;
         width: 120px;
         bottom: 15px;

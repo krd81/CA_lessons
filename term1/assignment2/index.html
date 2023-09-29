@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+    <!--Each HTML file uses the generic 'style.css' style sheet which contains styling common to all pages (e.g. background image, fonts, sizing etc)
+    to avoid having to duplicate this code on each style sheet.
+    
+    Each page also has its own specific style sheet which contains specific styling required for the individual webpage.
+-->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/homepage.css">
 
@@ -12,9 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@100;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-   
-    <nav>
-        <!--Menu bar code goes here-->
+   <!--Menu bar code goes here <nav> element used as the menu bar contains navigation links. The menu bar is shown at the top of each page in the site-->
+    <nav>        
         <div><a href="index.html">Home</a></div>
         <div><a href="about-me.html">About Me</a></div>
         <div><a href="career-history.html">Career History</a></div>
@@ -22,27 +26,28 @@
         <div><a href="blogs.html">Blogs</a></div>
     </nav>
 
+<!--Sections are used to separate parts of the page and to apply different styling or positioning to individual portions-->
 <section>
-    <h1>Kelly De Gannes</h1>
-    <div ID = "header-section">
+    <h1>Kelly De&nbspGannes</h1> <!--'&nbsp' used to ensure the line break (if required) doesn't split my surname onto different lines-->
+    <div>
         <img id = "banner" src="/images/test-image1.jpg" alt="panoramic banner image">
-   
-    
-    
+
     <img id="profile" src="/images/profile-photo-2.jpg" alt="Photo of Kelly">
    
-</div>
-   
-   
+    </div>   
 </section>
 
 <section>
     <h2>My journey to a career in tech</h2>
-    <p> This site has some info about my background, personally and professionally. It also showcases my abilities in web design and development!</p>
+    <p> Welcome to my site which I've created to provide information about my background, both personally and professionally. It also showcases my abilities in web design and development!
+        <br><br>If you would like any further information, please <strong>contact me</strong> using the links below.
+    </p>
 </section>
 
-<aside>
-     <!--Space for social links, copywrite etc-->
+
+<!--<aside> element used for the social links. Used a different container than the <section> elements used above as the social banner has 
+    a different purpose and requires some specific styling to be applied-->
+<aside>     
      <div>Connect with me:</div>
       
       <div><a href = "www.linkedin.com/in/kelly-de-gannes-89b120129"><img class="logo" src ="/images/logos/icons8-linkedin-48.png"></a></div> 
@@ -54,14 +59,15 @@
      
      <div><a href ="mailto:kelly.degannes@gmail.com"><img class="logo" src ="/images/logos/icons8-email-64.png"></a></div> 
     
-    <div><a class = "tooltip"><img class="logo" src ="/images/logos/icons8-whatsapp-48.png">
-            <span class="show-number">0481 143 752</span> 
+    <div><a ID = "tooltip"><img class="logo" src ="/images/logos/icons8-whatsapp-48.png">
+            <span ID="show-number">0481 143 752</span> 
         </a>
     </div>
      
 
 </aside>
 
+<!--This section contains a copywrite logo and is shown at the bottom of each page. As such its styling is controlled by the generic 'style.css' style sheet.-->
 <footer>
     <div>&copy Kelly De Gannes 2023</div>
 </footer>

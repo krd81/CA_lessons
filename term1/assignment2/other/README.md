@@ -10,3 +10,7 @@ Background attribution: Image by Image by <a href="https://www.freepik.com/free-
 
 
 <a href="https://www.freepik.com/free-vector/vegan-friendly-leaves-label-green-color_8413173.htm#query=vegan%20logo&position=8&from_view=keyword&track=ais">Image by starline</a> on Freepik
+
+If time allows:
+- Amend text on 'about-me' page to have hobbies/info on Riley etc
+- Blogs: work on moving button to bottom of post

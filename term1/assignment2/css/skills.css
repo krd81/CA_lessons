@@ -18,16 +18,14 @@ h2{
     border: 1px solid black;
     min-height: 7vh;
     font-size: 3vh;
-    background-color: #04AA6D;
+    background-color: rgb(4, 170, 109);
     color: white;
-   /* background-color: rgba(256,256,256, 0.6); */
-    padding: 2vh 5vh;
-    
+    padding: 2vh 5vh;    
     text-wrap: wrap ;
     transition: background-color 2s;
 }
 
-
+/* Manages visual display of the dropdown list of skills, which is initially hidden, until hovering on category heading */
 .dropdown {
    display: none;
     border-left: 1px solid black;
@@ -38,17 +36,14 @@ h2{
     position: relative;
     justify-content: center;
     background-color: white;
-    /*background-color: rgb(187, 185, 185);*/
     color: white;
     z-index: 1;
 }
 
-
+/* Controls the positioning of the dropdown list (ul element) */
 .dropdown ul {
-    color: salmon;
     display: block;
-    align-items: center;
-       
+    align-items: center;       
 }
 
 /*Show item list on hover*/
@@ -63,50 +58,50 @@ h2{
     background-color: rgb(256, 256, 256);
     border-bottom: none;
     text-align: center;
-    color: #04AA6D;
+    color: rgb(4, 170, 109);
 }
 
-/*Optional: effects on hovering list items*/
+/*Applies effects on hovering list items*/
 .dropdown ul>li:hover {
     background-color: pink;
 }
 
-
-
-
+/* Controls the styling of the items in the bullet point list */
 li {
     list-style: square; 
     font-size: 2vh;
- 
 }
 
-ul>p {
+
+p {
     margin-top: 15px;
     padding: -10px  ;
     font-size: 2vh;
-    color:#04AA6D ;
+    color:rgb(4, 170, 109) ;
     }
-
-
+   
 em {
     font-size: smaller;
     font-style: normal;
 }
 
+/*Additional code to ensure the footer (copywrite line) is positioned away from the main body of the page.
+Without this, the varying size of the dropdown lists, when they become visible, keep moving the footer position up and down*/
 footer{
     position: absolute ;
     bottom: -40px;
 
 }
 
-
+/*TABLET responsive display: ensures the initial width of each category is larger than the (initially hidden) dropdown lists
+to prevent the 'category' div from resizing when the dropdown becomes visible*/
 @media only screen and (min-width: 400px) and (max-width: 849px){
     .skills {
-        min-width: 540px;
-        
+        min-width: 540px;        
         }
     }
 
+/*DESKTOP responsive changes as per TABLET above*/
 @media only screen and (min-width: 850px){
     .skills {
     min-width: 600px;

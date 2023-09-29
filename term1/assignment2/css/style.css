@@ -13,6 +13,7 @@ Specific styling required by individual pages is located in that page's specific
    color: rgb(55, 92, 114);
 }
 
+/* The body styling is in the generic style sheet as this is where the background property, required for all pages, is held*/
 body {
     background: rgb(223, 222, 222)  url(/images/geo-background-1.jpg);
     background-size: 100vh;
@@ -21,7 +22,7 @@ body {
   
 }
 
-
+/* The nav styling is in the generic style sheet as the menu bar is shown on all pages*/
 nav{
     display: flex;
     flex-direction: row;
@@ -36,6 +37,7 @@ nav{
    
 }
 
+/*The following div and a styling are also related to controlling the styling behaviour of the menu bar*/
 div{
    
    padding: 0.75vh 1.5vh;
@@ -77,12 +79,8 @@ footer>div{
    
 }
 
-img {
-    border: 3px solid black;
-    border-radius: 2%;
-}
 
-
+/*TABLET media breakpoint controlling the response for font sizing and positioning of elements*/
 @media only screen and (min-width: 400px) and (max-width: 849px){
     p, nav{
         font-size: 1.3rem;
@@ -96,11 +94,10 @@ img {
     nav {
         padding: 0 5vw;
         align-self: stretch;
-    }
-    
-   
+    }   
 }
 
+/*DESKTOP media breakpoint controlling the response for font sizing and positioning of elements*/
 @media only screen and (min-width: 850px){
     p, nav{
         font-size: 1.3rem;

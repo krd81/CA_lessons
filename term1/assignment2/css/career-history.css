@@ -25,11 +25,14 @@ ulist{
     margin-left: 5vh;
 }
 
-a:hover { 
- color:deeppink ;   
+/* Specific ID used to target this hyperlink and not those in the menu bar */
+#CV:hover { 
+ color: deeppink;   
 }
 
 
+
+/* TABLET media breakpoint controlling the maximum width of the text/paragraph elements on wider screens */
 @media only screen and (min-width: 400px) and (max-width: 849px){
     section{        
         max-width: 650px;
@@ -42,6 +45,7 @@ a:hover {
 
 }
 
+/* DESKTOP media breakpoint controlling the maximum width of the text/paragraph elements on wider screens */
 @media only screen and (min-width: 850px){
     section{        
         max-width: 650px;

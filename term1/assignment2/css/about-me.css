@@ -1,3 +1,5 @@
+/*Styling for this page is simply controlling the layout and sizing of the elements and text*/
+
 body{
     display: flex;
     flex-direction: column;
@@ -41,6 +43,7 @@ figcaption{
     padding-left: 15px;
 }
 
+/*TABLET - no layout/styling changes required*/
 @media only screen and (min-width: 400px) and (max-width: 849px){
 h2 {
     font-size: 2rem
@@ -52,7 +55,8 @@ p, figcaption {
 
 }
 
-/*desktop view shows the images next to each other and with the content centred on the page*/
+/*DESKTOP view shows the images next to each other and with the content centred on the page
+Also some adjustments for font sizes and a limit to how large the images can become on wider screen sizes*/
 @media only screen and (min-width: 850px){
        h2 {
         font-size: 2rem
@@ -66,19 +70,13 @@ p, figcaption {
         font-size: 0.9rem;
     }
     
-    img {
-   
-        max-width: 250px;
-
-    
+    img {  
+        max-width: 250px;   
     }
 
     figure{
         display: flex;
-        flex-direction: column;
-        
-        
-        
+        flex-direction: column;        
     }
 
     section{
