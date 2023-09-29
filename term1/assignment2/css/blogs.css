@@ -64,6 +64,14 @@ section>div:last-of-type{
     font-size: 1.2rem;
 }
 
+/*ATTEMPT TO MOVE BUTTON TO THE BOTTOM OF THE POST
+section>div:last-of-type {
+    position: sticky;
+    bottom: 0px;
+    
+    background-color: red;
+}
+*/
 
 button{
     border: 1px solid black;
@@ -85,9 +93,19 @@ button{
     box-shadow: 2px 2px rgb(164, 144, 144);
 }
 
+/*HIDES THE LAST SECTION, WHICH IS A DUMMY POST
+article>section:last-of-type {
+    visibility: hidden;
+    display: flex; 
+    position: relative;
+    background-color: red;
+   
+}  */
+
+
 @media only screen and (min-width: 400px) and (max-width: 849px){
     .blog-post{
-                max-width: 450px;
+        max-width: 450px;
        
        
     }
@@ -114,31 +132,11 @@ button{
         justify-content: center;
         flex-direction: row;
         flex-wrap: wrap;
-       
-    }
-    
-    /*HIDES THE LAST SECTION, WHICH IS A DUMMY POST*/
-    article>section:last-of-type {
-        visibility: hidden;
-        display: flex; 
-        position: relative;
-        background-color: red;
-       
+        margin: 2rem 5rem;
+        max-width: 850px;
     }
     
 
-
-    #blog-1, #blog-2 {
-        flex: 2;
-        min-height: 50vh;
-    }
-    
-    .blog-post{
-        
-        max-width: 300px;
-
-
-    }
 
     img{
         max-width: 250px;

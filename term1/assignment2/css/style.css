@@ -31,6 +31,7 @@ nav{
     background-color: rgba(91, 109, 127, 0.5);
     min-height: 5vh;
     max-height: 10vh;
+    min-width: 100vw;
     padding: 0;
    
 }
