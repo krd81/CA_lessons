@@ -22,8 +22,78 @@ The website is fully responsive with fonts and elements, resized or with altered
 The external links have been created so that they open in a new browser window, so that the user does not inadvertently leave the website when going to view github or the resume for example. 
 
 ## Sitemap
+![Sitemap](/docs/sitemap.pdf)
 
 ## Screenshots
+# Homepage
+- Mobile
+
+![Mobile homepage](/docs/homepage-mobile.png)  
+- Tablet
+
+![Tablet homepage](/docs/homepage-tablet.png)  
+
+- Desktop
+
+![Desktop homepage](/docs/homepage-desktop.png)
+
+
+# About Me
+- Mobile
+
+![Mobile about-me](/docs/about-me-mobile-1.png)  
+
+![Mobile about-me](/docs/about-me-mobile-2.png)  
+- Tablet
+
+![Tablet about-me](/docs/about-me-tablet-1.png)  ![Tablet about-me](/docs/about-me-tablet-2.png)
+
+- Desktop
+
+![Desktop about-me](/docs/about-me-desktop.png)  
+
+
+
+# Career History
+- Mobile
+
+![Mobile career-history](/docs/career-history-mobile.png)
+- Tablet
+
+![Tablet career-history](/docs/career-history-tablet.png)
+
+- Desktop
+
+![Desktop career-history](/docs/career-history-desktop.png)
+
+
+
+# Skills
+- Mobile
+
+![Mobile skills](/docs/skills-mobile-1.png)  ![Mobile skills](/docs/skills-mobile-2.png)  
+- Tablet
+
+![Tablet skills](/docs/skills-tablet-1.png)  ![Tablet skills](/docs/skills-tablet-2.png)
+
+- Desktop
+
+![Desktop skills](/docs/skills-desktop-1.png)  ![Desktop skills](/docs/skills-desktop-2.png)
+
+
+
+# Blogs
+- Mobile
+
+![Mobile blogs](/docs/blogs-mobile.png)  
+- Tablet
+
+![Tablet blogs](/docs/blogs-tablet.png)  
+
+- Desktop
+
+![Desktop blogs](/docs/blogs-desktop.png)
+
 
 ## Target Audience
 Potential future employers and recruiters - it has been designed to be user-friendly and easy to navigate so no technical knowledge is required to fully benefit from its features.

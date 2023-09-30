@@ -38,7 +38,7 @@ h1 {
     z-index: -1;
     border: 0;
     margin: 0;
-    max-width: 100vw;
+    width: 100vw;
     min-height: 40vh;
     border-radius: 0;
     
@@ -54,7 +54,7 @@ h1 {
     border: 1px solid black;
 
     width: 18vh;
-    border-radius: 150px;
+    border-radius: 100%;
 }
 
 /* This is styling for TEXT COMPONENT 2 */
@@ -169,7 +169,7 @@ where there is more space on a larger screen*/
     }
 
     #profile {
-        right: 55vw;
+        left: 400px;
         border-width: 3px;
         width: 20%;
      }     
