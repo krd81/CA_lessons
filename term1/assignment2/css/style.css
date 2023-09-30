@@ -75,8 +75,11 @@ footer{
 
 footer>div{
     padding: 5px 0;
-    height: 15px;
-   
+    height: 15px;   
+}
+
+#footer-link:hover {
+    color: darkorange;
 }
 
 
