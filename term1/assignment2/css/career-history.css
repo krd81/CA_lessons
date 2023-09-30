@@ -3,22 +3,26 @@ body{
     flex-direction: column;
 }
 
+/* This is styling for TEXT COMPONENT 4 */
 section {    
     display: flex;
     flex-direction: column;
     padding: 3vh;
 }
 
+/* This is styling for TEXT COMPONENT 4 */
 h2{
     margin-bottom: 2vh;
 }
 
+/* This is styling for TEXT COMPONENT 4 */
 p{
     line-height: 2;
     font-size: large;
 
 }
 
+/* This is styling for TEXT COMPONENT 4 */
 ulist{
     line-height: 1.5;
     margin-top: 2vh;
@@ -26,6 +30,7 @@ ulist{
 }
 
 /* Specific ID used to target this hyperlink and not those in the menu bar */
+/* This is styling for TEXT COMPONENT 4 */
 #CV:hover { 
  color: deeppink;   
 }

@@ -6,28 +6,33 @@ body{
    
 }
 
+/* This is styling for GRAPHICAL COMPONENT 3 */
 section {    
     display: flex;
     flex-direction: column;
     padding: 3vh;
 }
 
+/* This is styling for GRAPHICAL COMPONENT 3 */
 img {
    
     max-width: 45vw;
 
 }
 
+/* This is styling for GRAPHICAL COMPONENT 3 */
 h2{
     margin: 2vh 0;
 }
 
+/* This is styling for GRAPHICAL COMPONENT 3 */
 p{
     line-height: 2;
     font-size: large;
 
 }
 
+/* This is styling for GRAPHICAL COMPONENT 3 */
 figure{
     display: flex;
     flex-direction: column;
@@ -37,6 +42,7 @@ figure{
     
 }
 
+/* This is styling for GRAPHICAL COMPONENT 3 */
 figcaption{
     margin-top: 2vh;
     max-width: 45vw;

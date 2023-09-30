@@ -5,7 +5,9 @@ body{
     flex-direction: column;
 }
 
-
+/* This is styling for TEXT COMPONENT 2 */
+/* This is styling for GRAPHICAL COMPONENT 1 */
+/* This is styling for GRAPHICAL COMPONENT 2 */
 section, aside {
     display: flex;
     flex-direction: column;
@@ -20,6 +22,7 @@ section, aside {
     
 }
 
+/* This is styling for GRAPHICAL COMPONENT 1 */
 h1 {
     text-align: center;
     margin: 5vh 0 0 0;
@@ -29,6 +32,7 @@ h1 {
 
 
 /*ID used to target the background image on the homepage, controlling the positioning ensuring it fills the screen and z-index to allow the profile picture to be in front*/
+/* This is styling for GRAPHICAL COMPONENT 1 */
 #banner{
     position: static;
     z-index: -1;
@@ -42,6 +46,7 @@ h1 {
 
 
 /*ID also used for the profile image so that specific styling can be applied to this element*/
+/* This is styling for GRAPHICAL COMPONENT 1 */
 #profile {
    position: absolute;
       
@@ -52,6 +57,7 @@ h1 {
     border-radius: 150px;
 }
 
+/* This is styling for TEXT COMPONENT 2 */
 h2 {
     text-align: center;
     margin-top: 4vh;
@@ -59,13 +65,14 @@ h2 {
 
 
 /*use section:last-of-type to target the paragraph before social media icons and ensure it has a maximum width on wide screens*/
-
+/* This is styling for TEXT COMPONENT 2 */
 section:last-of-type{
         max-width: 850px;
  }
 
 
 /*Styling for the social media/contacts banner, managing the layout, colour and positioning */
+/* This is styling for GRAPHICAL COMPONENT 2 */
 aside {
     display: flex;
     flex-direction: row;
@@ -84,6 +91,7 @@ aside {
 
 
 /* The remaining css statements are to manage the social media icons, in particular their size and the spacing between them*/
+/* This is styling for GRAPHICAL COMPONENT 2 */
 .logo {
     position: relative;
     width: 5vh;
@@ -92,12 +100,14 @@ aside {
 }
 
 /* tooltip & show-number IDs are to allow a phone number floating element to appear when hovering on the "whatsapp" icon*/
+/* This is styling for GRAPHICAL COMPONENT 2 */
 #tooltip{
     position: relative;
     display: inline-block;
     
 }
 
+/* This is styling for GRAPHICAL COMPONENT 2 */
 #tooltip #show-number{
     visibility: hidden;
     width: 90px;
@@ -115,6 +125,7 @@ aside {
 
 }
 
+/* This is styling for GRAPHICAL COMPONENT 2 */
 #tooltip:hover #show-number {
     visibility: visible;
 }

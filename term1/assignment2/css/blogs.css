@@ -10,6 +10,7 @@ h2 {
 
 
 /* Manages the layout and appearance of each section specified by the class 'blog-post'*/ 
+/* This is styling for GRAPHICAL COMPONENT 4 */
 .blog-post{    
     display: flex;
     flex-direction: column;
@@ -22,13 +23,14 @@ h2 {
     margin: 2vh;
 }
 
-
+/* This is styling for GRAPHICAL COMPONENT 4 */
 .image{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* This is styling for GRAPHICAL COMPONENT 4 */
 img {
     max-width: min(40vw , 400px);
     min-width: 200px;
@@ -37,6 +39,7 @@ img {
 
 /* Ensures the button is displayed in the centre of its container 
 flex property used to control the flex-grow basis of this section - so that regardless of the blog container growing based on the flexible layout, the button will always be positioned the bottom of the post*/
+/* This is styling for GRAPHICAL COMPONENT 4 */
 section>div:last-of-type{    
     display: grid;
     position: relative;
@@ -46,6 +49,7 @@ section>div:last-of-type{
    
 }
 
+/* This is styling for GRAPHICAL COMPONENT 4 */
 .post-category{
     font-family: 'Antonio', sans-serif;
     font-weight: 500;
@@ -53,6 +57,7 @@ section>div:last-of-type{
     font-size: 1.5rem;
 }
 
+/* This is styling for GRAPHICAL COMPONENT 4 */
 .date, sup{
     font-family: 'Antonio', sans-serif;
     font-weight: 100;
@@ -60,6 +65,7 @@ section>div:last-of-type{
     font-size: small;
 }
 
+/* This is styling for GRAPHICAL COMPONENT 4 */
 .title {
     font-family: 'Antonio', sans-serif;
     font-weight: 100;
@@ -67,7 +73,7 @@ section>div:last-of-type{
     font-size: 1.2rem;
 }
 
-
+/* This is styling for GRAPHICAL COMPONENT 4 */
 button{
     border: 1px solid black;
     border-radius: 5px;

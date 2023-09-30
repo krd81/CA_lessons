@@ -8,12 +8,14 @@ h2{
     text-align: center;
 }
 
+/* This is styling for TEXT COMPONENT 5 */
 .skills {
     position: relative;
     display: block;
     max-width: 540px;
 }
 
+/* This is styling for TEXT COMPONENT 5 */
 .category {
     border: 1px solid black;
     min-height: 7vh;
@@ -26,6 +28,7 @@ h2{
 }
 
 /* Manages visual display of the dropdown list of skills, which is initially hidden, until hovering on category heading */
+/* This is styling for TEXT COMPONENT 5 */
 .dropdown {
    display: none;
     border-left: 1px solid black;
@@ -41,12 +44,14 @@ h2{
 }
 
 /* Controls the positioning of the dropdown list (ul element) */
+/* This is styling for TEXT COMPONENT 5 */
 .dropdown ul {
     display: block;
     align-items: center;       
 }
 
 /*Show item list on hover*/
+/* This is styling for TEXT COMPONENT 5 */
 .skills:hover .dropdown {
     display: flex;
     align-items: center;
@@ -54,6 +59,7 @@ h2{
 }
 
 /*Applies transition effect to heading on hover*/
+/* This is styling for TEXT COMPONENT 5 */
 .skills:hover .category {
     background-color: rgb(256, 256, 256);
     border-bottom: none;
@@ -62,24 +68,27 @@ h2{
 }
 
 /*Applies effects on hovering list items*/
+/* This is styling for TEXT COMPONENT 5 */
 .dropdown ul>li:hover {
     background-color: pink;
 }
 
 /* Controls the styling of the items in the bullet point list */
+/* This is styling for TEXT COMPONENT 5 */
 li {
     list-style: square; 
     font-size: 2vh;
 }
 
-
+/* This is styling for TEXT COMPONENT 5 */
 p {
     margin-top: 15px;
     padding: -10px  ;
     font-size: 2vh;
     color:rgb(4, 170, 109) ;
     }
-   
+
+    /* This is styling for TEXT COMPONENT 5 */
 em {
     font-size: smaller;
     font-style: normal;
@@ -87,6 +96,7 @@ em {
 
 /*Additional code to ensure the footer (copywrite line) is positioned away from the main body of the page.
 Without this, the varying size of the dropdown lists, when they become visible, keep moving the footer position up and down*/
+/* This is additional styling for TEXT COMPONENT 3 */
 footer{
     position: absolute ;
     bottom: -40px;
