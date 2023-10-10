@@ -1,3 +1,4 @@
+# ```py
 ''' Function to calculate the frame score
     If either the first score is 10, or the sum of the first 2 scores is 10,
     then the total score is the sum of the first 3 balls
@@ -59,3 +60,4 @@ frame_score = calc_frame(ball_1, ball_2, ball_3)
 
 print(f"The frame score is: {frame_score}" )
 
+# ```
