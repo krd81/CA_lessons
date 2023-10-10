@@ -3,7 +3,7 @@ Program to calculate the coding score for job applicants
 '''
 
 
-competency_name = ["Python", "Ruby", "Bash", "Git", "HTML", "TDD", "CSS", "JavaScript"]  #List to store each competancy name
+competency_name = ["Python", "Ruby", "Bash", "Git", "HTML", "TDD", "CSS", "JavaScript"]  #List to store each competency name
 competency_score = [1, 2, 4, 8, 16, 32, 64, 128] #List to store each competancy score in the corresponding element to match the name list
 applicant_skills = [] #List to store Y or N according to the user's answers in the corresponding element to match the name list
 
