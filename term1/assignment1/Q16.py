@@ -25,15 +25,14 @@ print("Answer Yes or No to indicate your skills\n")
 # While loop asks user to enter yes or no for each language
 # The loop keeps track of the score and also adds, Y or N in the appropriate position
 # in the applicant_skills list
-i = 0
-while (i < len(competency_name)):
+for i in range(len(competency_name)):
     answer = input(f"{competency_name[i]} - Enter Y or N: ")    
     if (answer.upper() == "Y"):
         user_coding_score += competency_score[i]
         addto_applicant_skills(answer.upper)
     else:
         addto_applicant_skills()
-    i += 1
+      
 
 # Adds up the maximum possible score - this function runs each time in case the corporation decides to change the scores
 for i in range(len(competency_score)):
@@ -49,7 +48,7 @@ if (user_coding_score < max_coding_score):
     print("Suggestions for additional skills which would improve your score:\n\n")
     print(f"{'SKILL':10} : {'SCORE':>7}")
     print("----------------------")
-    for i in range (len(applicant_skills)):
+    for i in range (len(applicant_skills)): 
         if (applicant_skills[i] == "N"):
             print(f"{competency_name[i]:10} : {competency_score[i]:>7}")
             additional_score += competency_score[i]
