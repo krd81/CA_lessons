@@ -7,7 +7,7 @@ num_dice_defender = 3
 
 # roll function is responsible for 'rolling' the die and adding the
 # random numbers generated to the arrays
-def roll (num_dice_attacker, num_dice_defender):
+def roll ():
     for i in range(num_dice_attacker):
         die_roll = random.randint(1,6)
         attacker_roll.append(die_roll)
@@ -21,21 +21,20 @@ def roll (num_dice_attacker, num_dice_defender):
     return [attacker_roll, defender_roll]
 
 
-def battle (rolls, num_dice_attacker, num_dice_defender):
+def battle (num_dice_attacker, num_dice_defender):
 
-    attacker_roll = rolls[0]
-    defender_roll = rolls[1]
+    # attacker_roll = rolls[0]
+    # defender_roll = rolls[1]
     min_dice = min(len(attacker_roll), len(defender_roll))
     attacker_roll.sort(reverse = True)
     defender_roll.sort(reverse = True)
-
+    
+    count = 0
     for i in range(min_dice):
-        count = 0
         if(attacker_roll[i] > defender_roll[i]):
             # count is no. attack wins (or defender loses)
             count += 1
     
-
     num_dice_defender -= count    
     num_dice_attacker -= (min_dice-count)
     
@@ -50,10 +49,12 @@ def battle (rolls, num_dice_attacker, num_dice_defender):
 # BATTLE : THE SCORES ARE COMPARED AND THE NUMBER OF DICE ARE UPDATED
 # PROCESS KEEPS GOING UNTIL 1 SIDE HAS 0 DICE
 
-# while (num_dice_attacker > 0 and num_dice_defender > 0):
-roll (num_dice_attacker, num_dice_defender)
-
-# battle (roll(num_dice_attacker, num_dice_defender),num_dice_attacker, num_dice_defender)
+while (num_dice_attacker > 0 and num_dice_defender > 0):
+    # roll (num_dice_attacker, num_dice_defender)
+    roll()
+    print(f'{attacker_roll} , {defender_roll}')
+    # battle (roll(num_dice_attacker, num_dice_defender),num_dice_attacker, num_dice_defender)
+    battle(num_dice_attacker, num_dice_defender)
 
 
 
