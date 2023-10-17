@@ -7,13 +7,14 @@ class Customer():
         self.DOB = DOB
 
 
-def set_address(self, address):
-    self.address = address.Address(address)
+# def set_address(self, address):
+#     self.address = address.Address(address)
 
 
 
 def get_customer_info(self):
-    return self.name, self.address, self.DOB
+    # return self.name, self.address, self.DOB
+    return self.name, self.DOB
 
 
     

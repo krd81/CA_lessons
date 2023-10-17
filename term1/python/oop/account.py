@@ -1,30 +1,33 @@
-import customer
+import customer, address
 
 class Account:
     def __init__(self, account_holder, initial_balance):
         self.account_holder = customer.Customer('name', 'DOB')
         self.balance = initial_balance
+        # self.addr = []
+
+    # def set_address(self, address):
+        # self.addr = address.Address(address)
+
+
 
     def get_balance(self):
         print(f"The account balance is: ${self.balance}")
 
     def deposit(self, amount):
         self.balance += amount
-        print(f"${amount} deposited. New account balance is: ${self.balance}")
+        return amount
 
 
     def withdraw(self, amount):
         if (self.balance >= amount):
-            self.balance -= amount
-            print(f"${amount} withdrawn. New account balance is: ${self.balance}")    
+            self.balance -= amount              
         else:
-            raise Exception("Insufficient funds - withdrawal not processed")
+            amount = 0
+        return 0
     
     def transfer(self, amount, to_acc):
-        if (self.balance >= amount):
-            self.balance -= amount
-            to_acc.deposit(amount)
-            print(f"${amount} transferrred. New account balance is: ${self.balance}")    
-        else:
-            raise Exception()
+        return self.withdraw(to_acc.deposit(amount))
+
+
 
