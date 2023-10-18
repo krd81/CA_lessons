@@ -29,6 +29,23 @@ import csv
 
 
 def display_order():
+    
+    with open ('order.csv') as f:
+        order_total = 0
+        reader = csv.DictReader(f)
+        for row in reader:
+           item_total = 0
+           unit_price = float(row['unit_price'])
+           quantity = int(row['qty'])
+           item_total = unit_price * quantity
+           order_total += item_total
+           print(f'{quantity} x {row['item']} @ ${unit_price:.2f} = ${item_total:.2f}')
+        print(f'Total: ${order_total:.2f}')
+        
+
+display_order()
+'''
+def display_order():
     item_total = 0
     order_total = 0
     with open ('order.csv') as f:
@@ -36,9 +53,7 @@ def display_order():
         for row in reader:
            
             print(f'{row['qty']} x {row['item']} @ ${float(row['unit_price'])} = ${int(row['qty']) * float(row['unit_price']):.2f}')
-        #     item_total = {int(row['qty']) * float(row['unit_price'])}
-        #     order_total += item_total
-        # print(f'Total: ${order_total:.2f}')
 
 
 display_order()
+'''
