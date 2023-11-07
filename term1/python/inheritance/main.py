@@ -43,6 +43,7 @@ class Car(Vehicle):
     def wind_up_windows(self):
         print("The windows are closed")
 
+
 class Motorbike(Vehicle):
     
     MAX_FUEL = 15
