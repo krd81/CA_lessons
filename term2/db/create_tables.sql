@@ -21,3 +21,10 @@ insert into categories (name, description) values
     ('Sports', 'Get out and play'),
     ('Video Games', 'Stay in and play')
     ;
+
+insert into items (name, description, category_id) values
+    ('Skyrim', 'Awesome open-world RPG', 4),
+    ('World of Warcraft', 'Popular MWORPG', 4),
+    ('iPhone', 'Apple''s flagship smartphone', 1),
+    ('Greg Norman golf clubs', 'At least you can look like a pro', 3)
+    ;
