@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+from datetime import date
 
 app = Flask(__name__)
 
@@ -23,11 +23,11 @@ def db_create():
     db.create_all()
     print('Created tables')
 
-@app.cli.command('db_create')
+@app.cli.command('db_seed')
 def db_seed():
     card = Card(
-        title = 'Start the project'
-        description = 'Stage 1 - Create ERD'
+        title = 'Start the project',
+        description = 'Stage 1 - Create ERD',
         date_created = date.today()
     )
     db.session.add(card)
@@ -42,3 +42,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
