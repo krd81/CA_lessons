@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 from flask_marshmallow import Marshmallow
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
@@ -9,6 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://trello_dev:spamegg
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+bcrypt = Bcrypt(app)
 print(db)
 
 class Card(db.Model):
@@ -24,6 +26,17 @@ class CardSchema(ma.Schema):
         fields = ('id', 'title', 'description', 'status', 'date_created')
 
 
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String)
+    email = db.Column(db.String, nullable = False, unique = True) # Will add validation later
+    password = db.Column(db.String, nullable = False) # Will be stored encrypted using 1-way hash
+    is_admin = db.Column(db.Boolean, default = False) # Will be used later for authorisation
+
+
+
 
 @app.cli.command('db_create')
 def db_create():
@@ -33,6 +46,20 @@ def db_create():
 
 @app.cli.command('db_seed')
 def db_seed():
+    users = [
+        User(
+            email = 'admin@spam.com',
+            password = bcrypt.generate_password_hash('spinynorman').decode('utf8'),
+            is_admin = True
+        ),
+        User(
+            name = 'John Cleese',
+            email = 'cleese@spam.com',
+            password = bcrypt.generate_password_hash('tisbutascratch').decode('utf8')
+        )
+    ]
+
+
     cards = [
         Card(
             title = 'Start the project',
@@ -54,6 +81,7 @@ def db_seed():
         ),]
     
     db.session.add_all(cards)
+    db.session.add_all(users)
     db.session.commit()
     print('Database seeded')
 
