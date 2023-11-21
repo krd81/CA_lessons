@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 from flask_marshmallow import Marshmallow
@@ -35,7 +35,9 @@ class User(db.Model):
     password = db.Column(db.String, nullable = False) # Will be stored encrypted using 1-way hash
     is_admin = db.Column(db.Boolean, default = False) # Will be used later for authorisation
 
-
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'name', 'email', 'password', 'is_admin')
 
 
 @app.cli.command('db_create')
@@ -95,6 +97,34 @@ def all_cards():
     # print(cards.all())
     for card in cards:
         print(card.__dict__)
+
+# Routes need to have a resource type
+# This is an entity that is being tracked by the api
+@app.route('/users/not_register', methods = ['POST'])
+def not_register():
+    user_info = UserSchema(exclude = ['id']).load(request.json)
+    
+    user = User(
+        email = user_info['email'],
+        password = bcrypt.generate_password_hash(user_info['password']).decode('utf8'),
+        name = user_info.get('name', '')
+    )
+    
+    # Add and commit the new user to the database
+    db.session.add(user)
+    db.session.commit()
+
+    print(user.__dict__)
+    # Return the new user
+    return UserSchema(exclude = ['password']).dump(user), 201
+
+
+@app.route('/users/register', methods = ['POST'])
+def register():
+    user_info = request.json
+    print(user_info)
+    return 'ok', 201
+    
 
 @app.route('/cards')
 def all_cards():
