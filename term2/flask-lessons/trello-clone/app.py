@@ -29,16 +29,15 @@ class CardSchema(ma.Schema):
 class User(db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    email = db.Column(db.String, nullable = False, unique = True) # Will add validation later
-    password = db.Column(db.String, nullable = False) # Will be stored encrypted using 1-way hash
-    is_admin = db.Column(db.Boolean, default = False) # Will be used later for authorisation
+    email = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'is_admin')
-
 
 @app.cli.command('db_create')
 def db_create():
@@ -119,12 +118,29 @@ def not_register():
     return UserSchema(exclude = ['password']).dump(user), 201
 
 
+
 @app.route('/users/register', methods = ['POST'])
 def register():
-    user_info = request.json
-    print(user_info)
-    return 'ok', 201
+    # user_info = request.json
+    # print(user_info)
+    # return 'ok', 201
     
+    user_info = UserSchema(exclude=['id']).load(request.json)
+    # Create a new user with the parsed data
+    user = User(
+        email=user_info['email'],
+        password=bcrypt.generate_password_hash(user_info['password']).decode('utf8'),
+        name=user_info.get('name', '')
+    )
+
+    # Add and commit the new user to the database
+    db.session.add(user)
+    db.session.commit()
+
+    # Return the new user
+    return UserSchema(exclude=['password']).dump(user), 201
+
+
 
 @app.route('/cards')
 def all_cards():
