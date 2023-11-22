@@ -1,16 +1,21 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from datetime import date
 from flask_marshmallow import Marshmallow
-from jsonpickle import encode as json
-from datetime import date
+from sqlalchemy.exc import IntegrityError
+# from jsonpickle import encode as json
+from datetime import date, timedelta
+from flask_bcrypt import Bcrypt
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://tomato:abc123@127.0.0.1:5432/ripe_tomatoes_db"
+app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks' 
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
 
 class Movie(db.Model):
     __tablename__ = "movies"
@@ -42,6 +47,18 @@ class ActorSchema(ma.Schema):
     class Meta:
         fields = ('id', 'f_name', 'l_name', 'gender', 'country')
 
+
+class User(db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(15), nullable = False, unique = True)
+    password = db.Column(db.String(15), nullable = False)
+
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'username', 'password')
 
 @app.cli.command("db_create")
 def db_create():
@@ -123,8 +140,18 @@ def db_seed():
             dob = "1990/07/02"
         ),]
     
+    users = [
+        User(
+            username = 'admin',
+            password = bcrypt.generate_password_hash('abc123').decode('utf8')
+        ),
+
+    ]
+
+
     db.session.add_all(movies)
     db.session.add_all(actors)
+    db.session.add_all(users)
     db.session.commit()
 
     print("Database seeded")
@@ -144,6 +171,48 @@ def all_actors():
     results = db.select(Actor)
     actors = db.session.scalars(results).all()
     return ActorSchema(many=True).dump(actors)
+
+
+@app.route('/auth/signup', methods = ['POST'])
+def signup():
+    try:
+        current_user = UserSchema().load(request.json)
+        if (len(current_user['password']) < 8):
+            return {'error' : 'Password must be between 8 and 12 characters long'}, 409
+        else:
+            # Create new user
+            user = User(
+                username = current_user['username'],
+                password = bcrypt.generate_password_hash(current_user['password']).decode('utf8')
+            )
+            # Add and commit the new user to the database
+            db.session.add(user)
+            db.session.commit()
+
+            token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 2))
+            # Return JWT / user        
+            return {'token' : token, 'user' : UserSchema(exclude = ['password']).dump(user)}, 201
+    except IntegrityError:
+        return {'error' : 'Another user has already registered that username'}, 409
+    
+
+
+@app.route('/auth/signin', methods = ['POST'])
+def signin():
+    current_user = UserSchema().load(request.json)
+
+    stmt = db.select(User).where(User.username == current_user['username'])
+    user = db.session.scalar(stmt)
+
+    if user and bcrypt.check_password_hash(user.password, current_user['password']):
+        token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 2))
+        return {'token' : token, 'user' : UserSchema(exclude = ['password']).dump(user)}, 200
+    else:
+        return {'error' : 'Username or password is incorrect'}, 409
+
+
+@app.route('/movies/update')
+@jwt_required()
 
 
 @app.route('/')
