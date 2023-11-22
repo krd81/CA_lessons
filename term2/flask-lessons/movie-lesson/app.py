@@ -1,11 +1,11 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy.exc import IntegrityError
 # from jsonpickle import encode as json
 from datetime import date, timedelta
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 
@@ -30,6 +30,10 @@ class Movie(db.Model):
 class MovieSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'genre', 'length', 'year')
+        update_1 = ('id', 'title')
+        update_2 = ('id', 'genre')
+        update_3 = ('id', 'length')
+        update_4 = ('id', 'year')
 
 
 class Actor(db.Model):
@@ -211,9 +215,42 @@ def signin():
         return {'error' : 'Username or password is incorrect'}, 409
 
 
-@app.route('/movies/update')
-@jwt_required()
+def update_records(table, record, column):
+    stmt = db.select(table).where(table.id == record)
+    record = db.session.scalar(stmt)
 
+
+    pass
+
+
+# Create delete method before attempting update
+def delete_records():
+    pass
+
+@app.route('/movies/update/<int:movie_id>', methods = ['POST'])
+@jwt_required()
+def movie_update(movie_id):
+    current_username = get_jwt_identity()
+    stmt = db.select(User).filter_by(username = current_username)
+    user = db.session.scalar(stmt)
+
+    movie = db.select(Movie).filter_by(id = movie_id)
+
+    update_request = MovieSchema().load(request.json)
+    update_column = update_request['genre']
+
+    if not user:
+        return {'error': 'User not found'}
+    else:
+        # if not movie:
+            # return {'error': 'Movie not found'}
+        # else:
+            update_records(Movie, movie.id, update_column)
+
+
+
+# @app.route('/movies/delete/<int:id>', methods = ['DELETE'])
+# @jwt_required()
 
 @app.route('/')
 def index():
