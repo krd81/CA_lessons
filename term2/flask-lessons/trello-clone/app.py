@@ -3,15 +3,22 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
+from sqlalchemy.exc import IntegrityError
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from datetime import timedelta
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://trello_dev:spameggs123@127.0.0.1:5432/trello'
 
+app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks' 
+
+
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
-print(db)
+jwt = JWTManager(app)
+# print(db)
 
 class Card(db.Model):
     __tablename__ = 'cards'
@@ -79,7 +86,7 @@ def db_seed():
             description = 'Stage 3 - Implement JSONify of models',
             status = 'In Progress',
             date_created = date.today()
-        ),]
+        )]
     
     db.session.add_all(cards)
     db.session.add_all(users)
@@ -99,50 +106,58 @@ def all_cards():
 
 # Routes need to have a resource type
 # This is an entity that is being tracked by the api
-@app.route('/users/not_register', methods = ['POST'])
-def not_register():
-    user_info = UserSchema(exclude = ['id']).load(request.json)
-    
-    user = User(
-        email = user_info['email'],
-        password = bcrypt.generate_password_hash(user_info['password']).decode('utf8'),
-        name = user_info.get('name', '')
-    )
-    
-    # Add and commit the new user to the database
-    db.session.add(user)
-    db.session.commit()
-
-    print(user.__dict__)
-    # Return the new user
-    return UserSchema(exclude = ['password']).dump(user), 201
-
-
-
 @app.route('/users/register', methods = ['POST'])
 def register():
-    # user_info = request.json
-    # print(user_info)
-    # return 'ok', 201
+    try:
+        # Parse the incoming POST body through the schema
+        user_info = UserSchema(exclude = ['id']).load(request.json)
+        
+        # Create a new user with the parsed data
+        user = User(
+            email = user_info['email'],
+            password = bcrypt.generate_password_hash(user_info['password']).decode('utf8'),
+            name = user_info.get('name', '')
+        )
+        
+        # Add and commit the new user to the database
+        db.session.add(user)
+        db.session.commit()
+
+        print(user.__dict__)
+        # Return the new user
+        return UserSchema(exclude = ['password']).dump(user), 201
+    except IntegrityError:
+        return {'error' : 'Email address already in use'}, 409
+
+
+@app.route('/users/login', methods = ['POST'])
+def login():
+    # 1. Parse incoming POST body through the schema
+    user_info = UserSchema(exclude=['id', 'name', 'is_admin']).load(request.json)
+    # 2. Select user with email that matches the one in the POST body
+    stmt = db.select(User).where(User.email == user_info['email'])
+    user = db.session.scalar(stmt)
+    # 3. Check password hash
+    if user and bcrypt.check_password_hash(user.password, user_info['password']):
+        # 4. Create JWT token NOTE: additional fields can be added in the additional claims, if unsure what to include in token
+        # token = create_access_token(identity=user.email, additional_claims={'email': user.email, 'name': user.name})
+        token = create_access_token(identity=user.email, expires_delta = timedelta(hours = 2))
+
+        # 5. Return the token (to the client) - use dictionary so that both token and user can be returned
+        return {'token': token, 'user': UserSchema(exclude=['password']).dump(user)}
+    else:
+        return {'error' : 'Invalid email or password'}, 401
     
-    user_info = UserSchema(exclude=['id']).load(request.json)
-    # Create a new user with the parsed data
-    user = User(
-        email=user_info['email'],
-        password=bcrypt.generate_password_hash(user_info['password']).decode('utf8'),
-        name=user_info.get('name', '')
-    )
 
-    # Add and commit the new user to the database
-    db.session.add(user)
-    db.session.commit()
-
-    # Return the new user
-    return UserSchema(exclude=['password']).dump(user), 201
+    
+    
+   
+    
 
 
 
 @app.route('/cards')
+@jwt_required()
 def all_cards():
     # select * from cards;
     stmt = db.select(Card).where(db.or_(Card.status != 'Done', Card.id > 0)).order_by(Card.title.desc())
