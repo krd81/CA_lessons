@@ -1,4 +1,4 @@
-from flask import Flask, request, abort
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from sqlalchemy.exc import IntegrityError
@@ -30,10 +30,6 @@ class Movie(db.Model):
 class MovieSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'genre', 'length', 'year')
-        update_1 = ('id', 'title')
-        update_2 = ('id', 'genre')
-        update_3 = ('id', 'length')
-        update_4 = ('id', 'year')
 
 
 class Actor(db.Model):
@@ -49,15 +45,15 @@ class Actor(db.Model):
 
 class ActorSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'f_name', 'l_name', 'gender', 'country')
+        fields = ('id', 'f_name', 'l_name', 'gender', 'country', 'dob')
 
 
 class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(15), nullable = False, unique = True)
-    password = db.Column(db.String(15), nullable = False)
+    username = db.Column(db.String, nullable = False, unique = True)
+    password = db.Column(db.String, nullable = False)
 
 
 class UserSchema(ma.Schema):
@@ -147,6 +143,7 @@ def db_seed():
     users = [
         User(
             username = 'admin',
+            # password = 'abc123'
             password = bcrypt.generate_password_hash('abc123').decode('utf8')
         ),
 
@@ -181,7 +178,7 @@ def all_actors():
 def signup():
     try:
         current_user = UserSchema().load(request.json)
-        if (len(current_user['password']) < 8):
+        if (len(current_user['password']) < 8 or len(current_user['password']) > 12):
             return {'error' : 'Password must be between 8 and 12 characters long'}, 409
         else:
             # Create new user
@@ -215,42 +212,45 @@ def signin():
         return {'error' : 'Username or password is incorrect'}, 409
 
 
-def update_records(table, record, column):
-    stmt = db.select(table).where(table.id == record)
-    record = db.session.scalar(stmt)
-
-
-    pass
-
-
-# Create delete method before attempting update
-def delete_records():
-    pass
-
-@app.route('/movies/update/<int:movie_id>', methods = ['POST'])
-@jwt_required()
-def movie_update(movie_id):
-    current_username = get_jwt_identity()
-    stmt = db.select(User).filter_by(username = current_username)
-    user = db.session.scalar(stmt)
-
-    movie = db.select(Movie).filter_by(id = movie_id)
-
-    update_request = MovieSchema().load(request.json)
-    update_column = update_request['genre']
-
-    if not user:
-        return {'error': 'User not found'}
-    else:
-        # if not movie:
-            # return {'error': 'Movie not found'}
-        # else:
-            update_records(Movie, movie.id, update_column)
-
-
-
-# @app.route('/movies/delete/<int:id>', methods = ['DELETE'])
+# @app.route('/movies/update')
 # @jwt_required()
+
+@app.route('/movies/add', methods = ['POST'])
+def add_movie():
+    new_movie = MovieSchema().load(request.json)
+
+    movie = Movie(
+        title = new_movie['title'],
+        genre = new_movie['genre'],
+        length = new_movie['length'],
+        year = new_movie['year']
+    )
+    db.session.add(movie)
+    db.session.commit()
+    print(f'New movie "{movie.title}" added to database')
+
+    return {'message': 'Success', 'movie': MovieSchema().dump(movie)}, 201
+
+
+@app.route('/actors/add', methods = ['POST'])
+def add_actor():
+    new_actor = ActorSchema().load(request.json)
+
+    actor = Actor(
+        f_name = new_actor['f_name'],
+        l_name = new_actor['l_name'],
+        gender = new_actor['gender'],
+        country = new_actor['country'],
+        dob = new_actor['dob']
+    )
+
+    db.session.add(actor)
+    db.session.commit()
+    print(f'New actor "{actor.f_name} {actor.l_name}" added to database')
+
+    return {'message': 'Success', 'actor': ActorSchema().dump(actor)}, 201
+
+
 
 @app.route('/')
 def index():
