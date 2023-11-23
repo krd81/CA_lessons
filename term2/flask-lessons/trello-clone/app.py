@@ -4,7 +4,7 @@ from datetime import date
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from datetime import timedelta
 
 app = Flask(__name__)
@@ -110,7 +110,7 @@ def all_cards():
 def register():
     try:
         # Parse the incoming POST body through the schema
-        user_info = UserSchema(exclude = ['id']).load(request.json)
+        user_info = UserSchema(exclude = ['id', 'is_admin']).load(request.json)
         
         # Create a new user with the parsed data
         user = User(
@@ -159,6 +159,18 @@ def login():
 @app.route('/cards')
 @jwt_required()
 def all_cards():
+    # Pseudo code to check is the user is an admin
+    # 1. Get the identity of the user via the token
+    user_email = get_jwt_identity()
+    # 2. Compare user's email against the database
+    stmt = db.select(User).where(User.email == user_email)
+    # 3.Create instance of user from the user retrieved from the database
+    user = db.session.scalar(stmt)
+
+    if not user.is_admin:
+        return {'error' : 'You must be an admin'}, 401
+
+
     # select * from cards;
     stmt = db.select(Card).where(db.or_(Card.status != 'Done', Card.id > 0)).order_by(Card.title.desc())
     cards = db.session.scalars(stmt).all()
@@ -174,3 +186,4 @@ def index():
 if __name__ == '__main__':
     app.run(debug=True)
 
+# get_jwt_identity is a simple way to obtain the token, decode it and return the sub (i.e. subject) of the token
