@@ -6,12 +6,13 @@ from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from datetime import timedelta
+from os import environ
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql+psycopg2://trello_dev:spameggs123@127.0.0.1:5432/trello'
 
-app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks' 
+app.config['JWT_SECRET_KEY'] = environ.get('JWT_KEY')
 
 
 db = SQLAlchemy(app)
