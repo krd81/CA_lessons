@@ -60,6 +60,9 @@ class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'username', 'password')
 
+
+
+
 @app.cli.command("db_create")
 def db_create():
     db.drop_all()
@@ -216,7 +219,11 @@ def signin():
 # @jwt_required()
 
 @app.route('/movies/add', methods = ['POST'])
+@jwt_required()
 def add_movie():
+    if not jwt_required():
+        print('User is not logged in!')
+        return {'message': 'You must be a registered user to perform this operation.'}, 422
     new_movie = MovieSchema().load(request.json)
 
     movie = Movie(
@@ -233,7 +240,10 @@ def add_movie():
 
 
 @app.route('/actors/add', methods = ['POST'])
+@jwt_required()
 def add_actor():
+    if not jwt_required():
+        return {'message': 'You must be a registered user to perform this operation.'}, 422
     new_actor = ActorSchema().load(request.json)
 
     actor = Actor(
@@ -249,6 +259,38 @@ def add_actor():
     print(f'New actor "{actor.f_name} {actor.l_name}" added to database')
 
     return {'message': 'Success', 'actor': ActorSchema().dump(actor)}, 201
+
+
+@app.route('/movies/delete/<int:movie_id>', methods = ['DELETE'])
+@jwt_required()
+def delete_movie(movie_id):
+    if not jwt_required():
+        return {'message': 'You must be a registered user to perform this operation.'}, 422
+    
+    stmt = db.select(Movie).where(Movie.id == movie_id)
+    movie = db.session.scalar(stmt)
+    if not movie:
+        return {'message' : 'Movie ID not found - please try again'}, 404
+    movie_title = movie.title
+    db.session.delete(movie)
+
+    return {'message' : f'{movie_title} has been deleted.'}, 200
+
+
+@app.route('/actors/delete/<int:actor_id>', methods = ['DELETE'])
+@jwt_required()
+def delete_actor(actor_id):
+    if not jwt_required():
+        return {'message': 'You must be a registered user to perform this operation.'}, 422
+    
+    stmt = db.select(Actor).where(Actor.id == actor_id)
+    actor = db.session.scalar(stmt)
+    if not actor:
+        return {'message' : 'Actor ID not found - please try again'}, 404
+    actor_name = f'{actor.f_name} {actor.l_name}'
+    db.session.delete(actor)
+
+    return {'message' : f'{actor_name} has been deleted.'}, 200
 
 
 
