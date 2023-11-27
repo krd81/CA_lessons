@@ -12,10 +12,16 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://tomato:abc123@127.0.0.1:5432/ripe_tomatoes_db"
 app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks' 
 
+def unauthorised_token_callback(error):
+    print (error)
+    return {'message': 'Not allowed'}, 422
+
+
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
+jwt.unauthorized_loader(unauthorised_token_callback)
 
 class Movie(db.Model):
     __tablename__ = "movies"
@@ -280,8 +286,6 @@ def delete_movie(movie_id):
 @app.route('/actors/delete/<int:actor_id>', methods = ['DELETE'])
 @jwt_required()
 def delete_actor(actor_id):
-    if not jwt_required():
-        return {'message': 'You must be a registered user to perform this operation.'}, 422
     
     stmt = db.select(Actor).where(Actor.id == actor_id)
     actor = db.session.scalar(stmt)
@@ -291,6 +295,12 @@ def delete_actor(actor_id):
     db.session.delete(actor)
 
     return {'message' : f'{actor_name} has been deleted.'}, 200
+
+
+@app.errorhandler(422)
+def unauthorised(err):
+    
+    return {'message': err.message}
 
 
 
