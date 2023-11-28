@@ -12,16 +12,17 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://tomato:abc123@127.0.0.1:5432/ripe_tomatoes_db"
 app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks' 
 
-def unauthorised_token_callback(error):
-    print (error)
-    return {'message': 'Not allowed'}, 422
+
 
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-jwt.unauthorized_loader(unauthorised_token_callback)
+@jwt.unauthorized_loader
+def my_unauthorized_token_callback(error_msg):
+    print(error_msg)
+    return {"err": "I can't let you do that"}, 401
 
 class Movie(db.Model):
     __tablename__ = "movies"
