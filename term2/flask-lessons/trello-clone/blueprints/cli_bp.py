@@ -1,9 +1,13 @@
+# Blueprints should create instances of classes and replace what 
+# would have been @app methods in the original un-modularised version
+
 from flask import Blueprint
 from setup import db, bcrypt
 from models.card import Card
 from models.user import User
 from datetime import date
 
+# 'db' needs to be called in the command line so choose a meaningful name
 db_commands = Blueprint('db', __name__)
 
 @db_commands.cli.command('create')
