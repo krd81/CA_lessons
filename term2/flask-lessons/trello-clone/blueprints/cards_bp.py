@@ -4,6 +4,8 @@ from setup import db
 from models.card import Card, CardSchema
 from auth import admin_required
 
+
+
 cards_bp = Blueprint('cards', __name__, url_prefix='/cards')
 # Get all cards
 @cards_bp.route('/')
@@ -29,9 +31,10 @@ def one_card(id):
 
 # Create new card
 @cards_bp.route('/', methods = ['POST'])
+@jwt_required()
 def create_card():
+    admin_required()
     card_info = CardSchema(exclude=['id', 'date_created']).load(request.json)
-
     card = Card(
         title = card_info['title'],
         description = card_info.get('description', ''),
@@ -43,7 +46,9 @@ def create_card():
 
 # Update a card
 @cards_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
+@jwt_required()
 def update_card(id):
+    admin_required()
     card_info = CardSchema(exclude=['id', 'date_created']).load(request.json)
     stmt = db.select(Card).filter_by(id=id) # same as .where(Card.id == id)
     card = db.session.scalar(stmt)
