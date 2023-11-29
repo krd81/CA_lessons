@@ -1,9 +1,10 @@
 '''
 TO DO:
-All controllers require view 1 item and an UPDATE endpoint
-Change the DB query in each to be filter instead of where
-Add search function to each of the controllers
-Add schema to exclude 'id' and anything else that shouldn't be changed
+[x] All controllers require view 1 item and an UPDATE endpoint
+[x] Change the DB query in each to be filter instead of where
+[x] Add authentication to create/edit/delete routes
+[ ] Add search function to each of the controllers
+[x] Add schema to exclude 'id' and anything else that shouldn't be changed
 '''
 
 
@@ -40,5 +41,13 @@ def create_app():
 
     for controller in registerable_controllers:
         app.register_blueprint(controller)
-    
+
     return app
+
+# Token exists but is incorrect/expired
+@jwt.invalid_token_loader
+# Token not present
+@jwt.unauthorized_loader
+def unauthorised_user(error):
+    print(error)
+    return {'error': 'User is unauthorised'}, 401

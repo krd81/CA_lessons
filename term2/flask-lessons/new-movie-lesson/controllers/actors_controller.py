@@ -1,10 +1,11 @@
 from flask import Blueprint, request
-from main import db
+from main import db, unauthorised_user
 from models.actors import Actor
 from schemas.actor_schema import *
 from flask_jwt_extended import jwt_required
 
 actors = Blueprint('actors', __name__, url_prefix='/actors')
+unauthorised_user
 
 # The GET route endpoint (get ALL actors)
 @actors.route('/')
@@ -17,7 +18,7 @@ def all_actors():
 
 # The GET route endpoint (get one actor)
 @actors.route('/<int:actor_id>')
-def all_actors(actor_id):
+def get_actor(actor_id):
     stmt = db.select(Actor).filter_by(id=actor_id)
     actor = db.session.scalar(stmt)
     if not actor:
@@ -51,7 +52,7 @@ def add_actor():
 
 # The PUT route endpoint (EDIT actor)
 @actors.route('/<int:actor_id>', methods = ['PUT', 'PATCH'])
-# @jwt_required()
+@jwt_required()
 def edit_actor(actor_id):
     update_info = actor_schema_no_id.load(request.json)
     stmt = db.select(Actor).filter_by(id=actor_id)
@@ -83,5 +84,6 @@ def delete_actor(actor_id):
     else:
         actor_name = f'{actor.f_name} {actor.l_name}'
         db.session.delete(actor)
-
-        return {'message' : f'{actor_name} has been deleted.'}, 200
+        db.session.commit()
+        print(f'{actor_name} has been deleted.')
+        return {}, 200

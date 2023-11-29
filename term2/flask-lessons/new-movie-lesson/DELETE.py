@@ -19,11 +19,7 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-@jwt.invalid_token_loader
-@jwt.unauthorized_loader
-def my_unauthorized_token_callback(error_msg):
-    print(error_msg)
-    return {"err": "I can't let you do that"}, 401
+
 
 
 

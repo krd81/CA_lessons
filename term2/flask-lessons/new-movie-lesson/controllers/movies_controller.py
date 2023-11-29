@@ -1,11 +1,12 @@
 from flask import Blueprint, request
-from main import db
+from main import db, unauthorised_user
 from models.movies import Movie
 from schemas.movie_schema import *
 from flask_jwt_extended import jwt_required
 
 
 movies = Blueprint('movies', __name__, url_prefix='/movies')
+unauthorised_user
 
 # The GET route endpoint (ALL movies)
 @movies.route('/')
@@ -35,11 +36,7 @@ def get_movie(movie_id):
 @movies.route('/', methods = ['POST'])
 @jwt_required()
 def add_movie():
-    if not jwt_required():
-        print('User is not logged in!')
-        return {'message': 'You must be a registered user to perform this operation.'}, 422
     new_movie = movie_schema_no_id.load(request.json)
-
     movie = Movie(
         title = new_movie['title'],
         genre = new_movie['genre'],
@@ -55,6 +52,7 @@ def add_movie():
 
 # The PUT route endpoint (EDIT movie)
 @movies.route('/<int:movie_id>', methods = ['PUT', 'PATCH'])
+@jwt_required()
 def edit_movie(movie_id):
     update_info = movie_schema_no_id.load(request.json)
     stmt = db.select(Movie).filter_by(id=movie_id)
@@ -86,6 +84,7 @@ def delete_movie(movie_id):
     else:    
         movie_title = movie.title
         db.session.delete(movie)
+        db.session.commit()
 
         print(f'{movie_title} has been deleted.')
         return {}, 200
