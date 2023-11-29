@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from setup import db
 from models.card import Card, CardSchema
 from auth import admin_required
@@ -16,7 +16,7 @@ def all_cards():
     # stmt = db.select(Card).where(db.or_(Card.status != 'Done', Card.id > 0)).order_by(Card.title.desc())
     stmt = db.select(Card)
     cards = db.session.scalars(stmt).all()
-    return CardSchema(many=True).dump(cards)
+    return CardSchema(many=True, exclude=['user.cards']).dump(cards)
 
 # Get one card
 @cards_bp.route('/<int:id>')
@@ -26,7 +26,7 @@ def one_card(id):
     card = db.session.scalar(stmt)
     if card:
         # print(card.User)
-        return CardSchema().dump(card)
+        return CardSchema(exclude=['user.cards']).dump(card)
     else:
         return {'error': 'Card not found'}, 404
     
@@ -35,16 +35,17 @@ def one_card(id):
 @cards_bp.route('/', methods = ['POST'])
 @jwt_required()
 def create_card():
-    admin_required()
+    # admin_required()
     card_info = CardSchema(exclude=['id', 'date_created']).load(request.json)
     card = Card(
         title = card_info['title'],
         description = card_info.get('description', ''),
-        status = card_info.get('status', 'To Do')
+        status = card_info.get('status', 'To Do'),
+        user_id = get_jwt_identity()
     )
     db.session.add(card)
     db.session.commit()
-    return  CardSchema().dump(card), 201
+    return  CardSchema(exclude=['user.cards']).dump(card), 201
 
 # Update a card
 @cards_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
@@ -59,7 +60,7 @@ def update_card(id):
         card.description = card_info.get('description', card.description)
         card.status = card_info.get('status', card.status)
         db.session.commit()
-        return CardSchema().dump(card)
+        return CardSchema(exclude=['user.cards']).dump(card)
     else:
         return {'error': 'Card not found'}, 404
     

@@ -47,10 +47,10 @@ def login():
     if user and bcrypt.check_password_hash(user.password, user_info['password']):
         # 4. Create JWT token NOTE: additional fields can be added in the additional claims, if unsure what to include in token
         # token = create_access_token(identity=user.email, additional_claims={'email': user.email, 'name': user.name})
-        token = create_access_token(identity=user.email, expires_delta = timedelta(hours = 2))
+        token = create_access_token(identity=user.id, expires_delta = timedelta(hours = 2))
 
         # 5. Return the token (to the client) - use dictionary so that both token and user can be returned
-        return {'token': token, 'user': UserSchema(exclude=['password']).dump(user)}
+        return {'token': token, 'user': UserSchema(exclude=['password', 'cards']).dump(user)}
     else:
         return {'error' : 'Invalid email or password'}, 401
     

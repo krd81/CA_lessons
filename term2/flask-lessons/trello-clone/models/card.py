@@ -11,7 +11,7 @@ class Card(db.Model):
     date_created = db.Column(db.Date(), default = datetime.now().strftime('%Y-%m-%d'))
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship('User')
+    user = db.relationship('User', back_populates='cards')
 
 class CardSchema(ma.Schema):
     user = fields.Nested('UserSchema', exclude=['password'])
