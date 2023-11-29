@@ -7,7 +7,9 @@ class UserSchema(ma.Schema):
 
 
 # Single Schema: Returns one user
-user_schema = UserSchema()
+user_schema_pw = UserSchema()
+
+user_schema_private = UserSchema(exclude=['password'])
 
 # Multiple Schema: Returns multiple users
-users_schema = UserSchema(many=True)
+users_schema = UserSchema(many=True, exclude=['password'])

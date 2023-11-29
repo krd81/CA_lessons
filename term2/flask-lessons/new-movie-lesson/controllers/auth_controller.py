@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from models.users import User
-from schemas.user_schema import user_schema
+from schemas.user_schema import *
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 from datetime import date, timedelta
@@ -13,7 +13,7 @@ auth = Blueprint('auth', __name__, url_prefix='/auth')
 @auth.route('/signup', methods = ['POST'])
 def signup():
     try:
-        current_user = user_schema.load(request.json)
+        current_user = user_schema_pw.load(request.json)
         if (len(current_user['password']) < 8 or len(current_user['password']) > 12):
             return {'error' : 'Password must be between 8 and 12 characters long'}, 409
         else:
@@ -28,7 +28,7 @@ def signup():
 
             token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 2))
             # Return JWT / user        
-            return {'token' : token, 'user' : user_schema(exclude = ['password']).dump(user)}, 201
+            return {'token' : token, 'user' : user_schema_private.dump(user)}, 201
     except IntegrityError:
         return {'error' : 'Another user has already registered that username'}, 409
     
@@ -36,13 +36,13 @@ def signup():
 # Signin / Login: POST route endpoint
 @auth.route('/signin', methods = ['POST'])
 def signin():
-    current_user = user_schema().load(request.json)
+    current_user = UserSchema().load(request.json)
 
     stmt = db.select(User).where(User.username == current_user['username'])
     user = db.session.scalar(stmt)
 
     if user and bcrypt.check_password_hash(user.password, current_user['password']):
         token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 2))
-        return {'token' : token, 'user' : user_schema(exclude = ['password']).dump(user)}, 200
+        return {'token' : token, 'user' : user_schema_private.dump(user)}, 200
     else:
         return {'error' : 'Username or password is incorrect'}, 409

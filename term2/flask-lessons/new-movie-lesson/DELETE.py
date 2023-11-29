@@ -9,8 +9,8 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://tomato:abc123@127.0.0.1:5432/ripe_tomatoes_db"
-app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks' 
+# app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql+psycopg2://tomato:abc123@127.0.0.1:5432/ripe_tomatoes_db"
+# app.config['JWT_SECRET_KEY'] = 'Ministry of Silly Walks' 
 
 
 

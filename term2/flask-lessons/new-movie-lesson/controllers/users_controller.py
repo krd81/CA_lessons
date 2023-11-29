@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from models.users import User
-from schemas.user_schema import user_schema, users_schema
+from schemas.user_schema import *
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 from datetime import date, timedelta
@@ -19,6 +19,17 @@ def all_users():
     return users_schema.dump(users)
 
 
+# The GET routes endpoint (show one user)
+@users.route('/<int:user_id>')
+def all_users(user_id):
+    # Select the required records
+    stmt = db.select(User).filter_by(id=user_id)
+    user = db.session.scalar(stmt)
+    if not user:
+        return {'message' : 'User ID not found - please try again'}, 404
+    else:        
+        return user_schema_private.dump(user), 200
+
 
 # The POST route endpoint (add new user)
 @users.route('/', methods = ['POST'])
@@ -28,7 +39,7 @@ def add_user():
     if not jwt_required():
         print('User is not logged in!')
         return {'message': 'You must be a registered user to perform this operation.'}, 422
-    new_user = user_schema.load(request.json)
+    new_user = user_schema_pw.load(request.json)
 
     user = User(
         username = new_user['username'],
@@ -38,7 +49,22 @@ def add_user():
     db.session.commit()
     print(f'New user "{user.username}" added to database')
 
-    return {'message': 'Success', 'user': user_schema.dump(user)}, 201
+    return {'message': 'Success', 'user': user_schema_private.dump(user)}, 201
+
+
+# The PUT route endpoint (EDIT user)
+@users.route('/<int:user_id>', methods = ['PUT', 'PATCH'])
+# @jwt_required()
+def edit_user(user_id):
+    edit_info = UserSchema(exclude=['id']).load(request.json)
+    stmt = db.select(User).filter_by(id=user_id)
+    user = db.session.scalar(stmt)
+    if not user:
+        return {'message' : 'User ID not found - please try again'}, 404
+    else:
+        user.username = edit_info.get('username', user.username)
+        user.password = edit_info.get('password', user.password)
+        return user_schema_private.dump(user), 200
 
 
 
@@ -50,13 +76,12 @@ def delete_user(user_id):
     if not jwt_required():
         return {'message': 'You must be a registered user to perform this operation.'}, 422
     
-    stmt = db.select(User).where(User.id == user_id) # Change to filter
+    stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
     if not user:
         return {'message' : 'User ID not found - please try again'}, 404
-    
-    db.session.delete(user)
-
-    return {'message' : f'{user.username} has been deleted.'}, 200
+    else:
+        db.session.delete(user)
+        return {'message' : f'{user.username} has been deleted.'}, 200
 
 

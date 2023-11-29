@@ -3,6 +3,7 @@ TO DO:
 All controllers require view 1 item and an UPDATE endpoint
 Change the DB query in each to be filter instead of where
 Add search function to each of the controllers
+Add schema to exclude 'id' and anything else that shouldn't be changed
 '''
 
 

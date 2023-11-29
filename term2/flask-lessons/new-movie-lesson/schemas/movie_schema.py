@@ -9,3 +9,6 @@ movie_schema = MovieSchema()
 
 # Multiple Schema: Returns multiple movies
 movies_schema = MovieSchema(many=True)
+
+# Create/Edit Movie Schema
+create_movie_schema = MovieSchema(exclude=['id'])
