@@ -20,9 +20,15 @@ def all_movies():
 @movies.route('/<int:movie_id>')
 def get_movie(movie_id):
     # Select the required records
-    results = db.select(Movie).filter_by(id=movie_id)
-    movies = db.session.scalars(results).all()
-    return movies_schema.dump(movies)
+    stmt = db.select(Movie).filter_by(id=movie_id)
+    movie = db.session.scalar(stmt)
+    if not movie:
+        return {'message' : 'Movie ID not found - please try again'}, 404
+    else:    
+        return movie_schema.dump(movie), 200
+
+
+
 
 
 # The POST route endpoint (ADD movie)
@@ -32,7 +38,7 @@ def add_movie():
     if not jwt_required():
         print('User is not logged in!')
         return {'message': 'You must be a registered user to perform this operation.'}, 422
-    new_movie = create_movie_schema.load(request.json)
+    new_movie = movie_schema_no_id.load(request.json)
 
     movie = Movie(
         title = new_movie['title'],
@@ -50,7 +56,7 @@ def add_movie():
 # The PUT route endpoint (EDIT movie)
 @movies.route('/<int:movie_id>', methods = ['PUT', 'PATCH'])
 def edit_movie(movie_id):
-    update_info = create_movie_schema.load(request.json)
+    update_info = movie_schema_no_id.load(request.json)
     stmt = db.select(Movie).filter_by(id=movie_id)
     movie = db.session.scalar(stmt)
     if not movie:
@@ -77,11 +83,12 @@ def delete_movie(movie_id):
     movie = db.session.scalar(stmt)
     if not movie:
         return {'message' : 'Movie ID not found - please try again'}, 404
-    movie_title = movie.title
-    db.session.delete(movie)
+    else:    
+        movie_title = movie.title
+        db.session.delete(movie)
 
-    print(f'{movie_title} has been deleted.')
-    return {}, 200
+        print(f'{movie_title} has been deleted.')
+        return {}, 200
 
 
 

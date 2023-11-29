@@ -11,4 +11,4 @@ movie_schema = MovieSchema()
 movies_schema = MovieSchema(many=True)
 
 # Create/Edit Movie Schema
-create_movie_schema = MovieSchema(exclude=['id'])
+movie_schema_no_id = MovieSchema(exclude=['id'])

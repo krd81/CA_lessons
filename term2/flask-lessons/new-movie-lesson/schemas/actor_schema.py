@@ -10,3 +10,6 @@ actor_schema = ActorSchema()
 
 # Multiple Schema: Returns multiple actors
 actors_schema = ActorSchema(many=True)
+
+# Create/Edit Movie Schema
+actor_schema_no_id = ActorSchema(exclude=['id'])
