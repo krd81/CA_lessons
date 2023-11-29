@@ -1,10 +1,11 @@
 from flask import Blueprint, request
 from flask import request
 from models.user import User, UserSchema
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required
 from sqlalchemy.exc import IntegrityError
 from datetime import timedelta
 from setup import db, bcrypt
+from auth import admin_required
 
 users_bp = Blueprint('users', __name__, url_prefix="/users")
 
@@ -53,3 +54,26 @@ def login():
     else:
         return {'error' : 'Invalid email or password'}, 401
     
+
+# Get all users
+@users_bp.route('/')
+@jwt_required()
+def all_users():
+    admin_required()
+    # select * from users;
+    # stmt = db.select(User).where(db.or_(User.status != 'Done', User.id > 0)).order_by(User.title.desc())
+    stmt = db.select(User)
+    users = db.session.scalars(stmt).all()
+    return UserSchema(many=True, exclude=['password']).dump(users)
+
+# Get one user
+@users_bp.route('/<int:id>')
+@jwt_required()
+def one_user(id):
+    stmt = db.select(User).filter_by(id=id) # same as .where(User.id == id)
+    user = db.session.scalar(stmt)
+    if user:
+        # print(user.User)
+        return UserSchema(exclude=['password']).dump(user)
+    else:
+        return {'error': 'User not found'}, 404

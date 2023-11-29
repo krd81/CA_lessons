@@ -13,7 +13,8 @@ cards_bp = Blueprint('cards', __name__, url_prefix='/cards')
 def all_cards():
     admin_required()
     # select * from cards;
-    stmt = db.select(Card).where(db.or_(Card.status != 'Done', Card.id > 0)).order_by(Card.title.desc())
+    # stmt = db.select(Card).where(db.or_(Card.status != 'Done', Card.id > 0)).order_by(Card.title.desc())
+    stmt = db.select(Card)
     cards = db.session.scalars(stmt).all()
     return CardSchema(many=True).dump(cards)
 
@@ -24,6 +25,7 @@ def one_card(id):
     stmt = db.select(Card).filter_by(id=id) # same as .where(Card.id == id)
     card = db.session.scalar(stmt)
     if card:
+        # print(card.User)
         return CardSchema().dump(card)
     else:
         return {'error': 'Card not found'}, 404
