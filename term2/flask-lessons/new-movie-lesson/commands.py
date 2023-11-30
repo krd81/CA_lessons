@@ -3,6 +3,7 @@ from flask import Blueprint
 from main import bcrypt
 from models.movies import Movie
 from models.actors import Actor
+from models.directors import Director
 from models.users import User
 from datetime import date
 
@@ -17,31 +18,61 @@ def db_create():
 
 @db_commands.cli.command("seed")
 def db_seed():
+    directors = [
+        Director(
+            name = "Greta Gerwig",
+            country = "USA"
+        ),
+        Director(
+            name = "Christopher Nolan",
+            country = "UK"
+        ),
+        Director(
+            name = "Rob Marshall",
+            country = "USA"
+        ),
+        Director(
+            name = "James Cameron",
+            country = "Canada"
+        ),
+    ]
+
+    db.session.add_all(directors)
+    db.session.commit()
+
+
     movies = [
         Movie(
             title = "Barbie",
             genre = "Comedy",
             length = "114",
-            year = "2023"
+            year = "2023",
+            director_id = directors[0].id
         ),
         Movie(
             title = "Oppenheimer",
             genre = "Drama",
             length = "180",
-            year = "2023"
+            year = "2023",
+            director_id = directors[1].id
         ),
         Movie(
             title = "The Little Mermaid",
             genre = "Animation",
             length = "135",
-            year = "2023"
+            year = "2023",
+            director_id = directors[2].id
         ),
         Movie(
             title = "Avatar: The Way of Water",
             genre = "Action",
             length = "192",
-            year = "2022"
+            year = "2022",
+            director_id = directors[3].id
         ),]
+
+    db.session.add_all(movies)
+    db.session.commit()
 
 
     actors = [
@@ -87,7 +118,12 @@ def db_seed():
             country = "Australia",
             dob = "1990/07/02"
         ),]
-    
+
+
+    db.session.add_all(actors)
+    db.session.commit()
+
+
     users = [
         User(
             username = 'admin',
@@ -96,9 +132,6 @@ def db_seed():
 
     ]
 
-
-    db.session.add_all(movies)
-    db.session.add_all(actors)
     db.session.add_all(users)
     db.session.commit()
 

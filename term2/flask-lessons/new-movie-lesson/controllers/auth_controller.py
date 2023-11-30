@@ -26,7 +26,7 @@ def signup():
             db.session.add(user)
             db.session.commit()
 
-            token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 2))
+            token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 24))
             # Return JWT / user        
             return {'token' : token, 'user' : user_schema_private.dump(user)}, 201
     except IntegrityError:

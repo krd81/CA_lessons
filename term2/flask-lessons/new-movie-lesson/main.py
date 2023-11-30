@@ -5,6 +5,7 @@ TO DO:
 [x] Add authentication to create/edit/delete routes
 [ ] Add search function to each of the controllers
 [x] Add schema to exclude 'id' and anything else that shouldn't be changed
+[ ] Add director CRUD routes (list directors with their films)
 '''
 
 

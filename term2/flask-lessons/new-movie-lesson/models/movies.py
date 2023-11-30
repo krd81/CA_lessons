@@ -10,5 +10,6 @@ class Movie(db.Model):
     length = db.Column(db.String(5))
     year = db.Column(db.String(4))
 
-
+    director_id = db.Column(db.Integer, db.ForeignKey('directors.id'), nullable=False)
+    director = db.relationship('Director', back_populates='movies')
 
