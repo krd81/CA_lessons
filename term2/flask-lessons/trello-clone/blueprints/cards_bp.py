@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from setup import db
 from models.card import Card, CardSchema
 from auth import admin_required
+from blueprints.comments_bp import comments_bp
 
 
 
@@ -78,3 +79,4 @@ def delete_card(id):
     else:
         return {'error': 'Card not found'}, 404
 
+cards_bp.register_blueprint(comments_bp)
