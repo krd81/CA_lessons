@@ -36,10 +36,6 @@ def get_user(user_id):
 @users.route('/', methods = ['POST'])
 @jwt_required()
 def add_user():
-    # *** RE-WRITE ***
-    if not jwt_required():
-        print('User is not logged in!')
-        return {'message': 'You must be a registered user to perform this operation.'}, 422
     new_user = user_schema_pw.load(request.json)
 
     user = User(
@@ -74,10 +70,6 @@ def edit_user(user_id):
 @users.route('/<int:user_id>', methods = ['DELETE'])
 @jwt_required()
 def delete_user(user_id):
-    # *** RE-WRITE ***
-    if not jwt_required():
-        return {'message': 'You must be a registered user to perform this operation.'}, 422
-    
     stmt = db.select(User).filter_by(id=user_id)
     user = db.session.scalar(stmt)
     if not user:

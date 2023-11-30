@@ -32,8 +32,6 @@ def get_actor(actor_id):
 @actors.route('/', methods = ['POST'])
 @jwt_required()
 def add_actor():
-    if not jwt_required():
-        return {'message': 'You must be a registered user to perform this operation.'}, 422
     new_actor = actor_schema_no_id.load(request.json)
 
     actor = Actor(

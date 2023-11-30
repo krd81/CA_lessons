@@ -73,10 +73,7 @@ def edit_movie(movie_id):
 # The DELETE route endpoint
 @movies.route('/<int:movie_id>', methods = ['DELETE'])
 @jwt_required()
-def delete_movie(movie_id):
-    if not jwt_required():
-        return {'message': 'You must be a registered user to perform this operation.'}, 422
-    
+def delete_movie(movie_id): 
     stmt = db.select(Movie).filter_by(id=movie_id)
     movie = db.session.scalar(stmt)
     if not movie:
