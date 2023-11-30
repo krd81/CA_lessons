@@ -28,6 +28,7 @@ def one_card(id):
     if card:
         # print(card.User)
         return CardSchema(exclude=['user.cards']).dump(card)
+        # return CardSchema().dump(card)
     else:
         return {'error': 'Card not found'}, 404
     
@@ -47,6 +48,7 @@ def create_card():
     db.session.add(card)
     db.session.commit()
     return  CardSchema(exclude=['user.cards']).dump(card), 201
+    # return CardSchema().dump(card), 201
 
 # Update a card
 @cards_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
@@ -62,6 +64,7 @@ def update_card(id):
         card.status = card_info.get('status', card.status)
         db.session.commit()
         return CardSchema(exclude=['user.cards']).dump(card)
+        # return CardSchema().dump(card)
     else:
         return {'error': 'Card not found'}, 404
     
