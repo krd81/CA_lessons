@@ -3,6 +3,7 @@ from main import db, unauthorised_user
 from models.movies import Movie
 from schemas.movie_schema import *
 from flask_jwt_extended import jwt_required
+from controllers.reviews_controller import reviews
 
 
 movies = Blueprint('movies', __name__, url_prefix='/movies')
@@ -86,6 +87,6 @@ def delete_movie(movie_id):
         print(f'{movie_title} has been deleted.')
         return {}, 200
 
-
+movies.register_blueprint(reviews)
 
 

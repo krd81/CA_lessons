@@ -13,3 +13,5 @@ class Movie(db.Model):
     director_id = db.Column(db.Integer, db.ForeignKey('directors.id'), nullable=False)
     director = db.relationship('Director', back_populates='movies')
 
+    reviews = db.relationship('Review', back_populates='movie')
+

@@ -5,6 +5,7 @@ from models.movies import Movie
 from models.actors import Actor
 from models.directors import Director
 from models.users import User
+from models.reviews import Review
 from datetime import date
 
 db_commands = Blueprint("db", __name__)
@@ -134,5 +135,27 @@ def db_seed():
 
     db.session.add_all(users)
     db.session.commit()
+
+    reviews = [
+        Review(
+            message = 'A fun and uplifting story about feminism, being in charge of your own destiny and how Barbie has inspired this movement',
+            movie_id = movies[0].id,
+            user_id = users[0].id
+        ),
+        Review(
+            message = 'A live action re-telling of the fairytale classic, with Halle Bailey and Jonah Hauer-King',
+            movie_id = movies[2].id,
+            user_id = users[0].id
+        ),
+        Review(
+            message = 'The long-awaited sequel to Avatar, which follows the life of Jake and Natiri as their family is exiled from their home on Pandora',
+            movie_id = movies[3].id,
+            user_id = users[0].id
+        )
+    ]
+
+    db.session.add_all(reviews)
+    db.session.commit()
+
 
     print("Database seeded")
