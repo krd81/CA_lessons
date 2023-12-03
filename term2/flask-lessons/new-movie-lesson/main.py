@@ -7,7 +7,7 @@ TO DO:
 [x] Add schema to exclude 'id' and anything else that shouldn't be changed
 [ ] Add director CRUD routes (list directors with their films)
 [ ] Find code to control what attribute is returned from get_jwt_identity()
-[ ] Print routes command: print(app.url_map)
+[x] Print routes command: print(app.url_map)
 '''
 
 

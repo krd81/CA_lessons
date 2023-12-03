@@ -37,13 +37,16 @@ def get_movie(movie_id):
 @movies.route('/', methods = ['POST'])
 @jwt_required()
 def add_movie():
-    new_movie = movie_schema_no_id.load(request.json)
+    # new_movie = movie_schema_no_id.load(request.json)
+    new_movie = MovieSchema().load(request.json)
+    print(new_movie)
     movie = Movie(
         title = new_movie['title'],
         genre = new_movie['genre'],
         length = new_movie['length'],
-        year = new_movie['year']
-    )
+        year = new_movie['year'],
+        director_id = new_movie.get('director', 6)
+     )
     db.session.add(movie)
     db.session.commit()
     print(f'New movie "{movie.title}" added to database')
@@ -65,6 +68,7 @@ def edit_movie(movie_id):
         movie.genre = update_info.get('genre', movie.genre)
         movie.length = update_info.get('length', movie.length)
         movie.year = update_info.get('year', movie.year)
+        movie.director = update_info.get('director_id', movie.director)
         db.session.commit()
         print(f'{movie.title} has been updated.')
         return movie_schema.dump(movie), 200

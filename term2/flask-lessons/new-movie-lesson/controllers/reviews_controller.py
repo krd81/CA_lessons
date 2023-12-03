@@ -5,7 +5,7 @@ from models.movies import Movie
 from schemas.review_schema import *
 from schemas.movie_schema import *
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
+# NEEDS FURTHER WORK TO UPDATE ROUTES TO INCLUDE MOVIE ID #
 
 reviews = Blueprint('reviews', __name__, url_prefix='/<int:movie_id>/reviews')
 unauthorised_user
@@ -56,7 +56,7 @@ def add_review(movie_id):
 @reviews.route('/<int:review_id>', methods = ['PUT', 'PATCH'])
 @jwt_required()
 def edit_review(movie_id, review_id):
-    update_info = review_schema_no_id.load(request.json)
+    update_info = review_schema.load(request.json)
     stmt = db.select(Review).filter_by(id=review_id)
     review = db.session.scalar(stmt)
     if not review:
