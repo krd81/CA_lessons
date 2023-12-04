@@ -4,15 +4,17 @@ from flask_jwt_extended import create_access_token, jwt_required
 from sqlalchemy.exc import IntegrityError
 from datetime import timedelta
 from setup import db, bcrypt
-from auth import admin_required
+from auth import *
 
 users_bp = Blueprint('users', __name__, url_prefix="/users")
 
 
 # Routes need to have a resource type
 # This is an entity that is being tracked by the api
+@jwt_required()
 @users_bp.route('/register', methods = ['POST'])
 def register():
+    authorize() # Only admins can register users
     try:
         # Parse the incoming POST body through the schema
         user_info = UserSchema(exclude = ['id', 'is_admin']).load(request.json)
@@ -58,7 +60,7 @@ def login():
 @users_bp.route('/')
 @jwt_required()
 def all_users():
-    admin_required()
+    authorize()
     # select * from users;
     # stmt = db.select(User).where(db.or_(User.status != 'Done', User.id > 0)).order_by(User.title.desc())
     stmt = db.select(User)
