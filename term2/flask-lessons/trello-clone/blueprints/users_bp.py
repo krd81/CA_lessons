@@ -11,10 +11,10 @@ users_bp = Blueprint('users', __name__, url_prefix="/users")
 
 # Routes need to have a resource type
 # This is an entity that is being tracked by the api
-@jwt_required()
+# @jwt_required()
 @users_bp.route('/register', methods = ['POST'])
 def register():
-    authorize() # Only admins can register users
+    # authorize() # Only admins can register users
     try:
         # Parse the incoming POST body through the schema
         user_info = UserSchema(exclude = ['id', 'is_admin']).load(request.json)
@@ -48,7 +48,7 @@ def login():
     if user and bcrypt.check_password_hash(user.password, user_info['password']):
         # 4. Create JWT token NOTE: additional fields can be added in the additional claims, if unsure what to include in token
         # token = create_access_token(identity=user.email, additional_claims={'email': user.email, 'name': user.name})
-        token = create_access_token(identity=user.id, expires_delta = timedelta(hours = 2))
+        token = create_access_token(identity=user.id, expires_delta = timedelta(hours = 24))
 
         # 5. Return the token (to the client) - use dictionary so that both token and user can be returned
         return {'token': token, 'user': UserSchema(exclude=['password', 'cards']).dump(user)}
@@ -60,7 +60,7 @@ def login():
 @users_bp.route('/')
 @jwt_required()
 def all_users():
-    authorize()
+    authorize() # Admin only
     # select * from users;
     # stmt = db.select(User).where(db.or_(User.status != 'Done', User.id > 0)).order_by(User.title.desc())
     stmt = db.select(User)

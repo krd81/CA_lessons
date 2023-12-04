@@ -23,7 +23,6 @@ def create_comment(card_id):
 @comments_bp.route('/<int:comment_id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_comment(card_id, comment_id):
-    # authorize()
     comment_info = CommentSchema(only=['message']).load(request.json)
     stmt = db.select(Comment).filter_by(id=comment_id) # .where(Comment.id == id)
     comment = db.session.scalar(stmt)
@@ -39,7 +38,6 @@ def update_comment(card_id, comment_id):
 @comments_bp.route('/<int:comment_id>', methods=['DELETE'])
 @jwt_required()
 def delete_comment(card_id, comment_id):
-    # authorize()
     stmt = db.select(Comment).filter_by(id=comment_id) # .where(Comment.id == id)
     comment = db.session.scalar(stmt)
     if comment:
