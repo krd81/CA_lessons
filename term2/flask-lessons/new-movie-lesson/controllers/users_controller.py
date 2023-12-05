@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from models.users import User
+from models.user import User
 from schemas.user_schema import *
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError

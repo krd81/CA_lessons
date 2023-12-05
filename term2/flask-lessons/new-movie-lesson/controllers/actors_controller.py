@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from main import db, unauthorised_user
-from models.actors import Actor
+from models.actor import Actor
 from schemas.actor_schema import *
 from flask_jwt_extended import jwt_required
 

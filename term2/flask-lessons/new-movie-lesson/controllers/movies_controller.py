@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from main import db, unauthorised_user
-from models.movies import Movie
+from models.movie import Movie
 from schemas.movie_schema import *
 from flask_jwt_extended import jwt_required
 from controllers.reviews_controller import reviews
@@ -40,13 +40,24 @@ def add_movie():
     # new_movie = movie_schema_no_id.load(request.json)
     new_movie = MovieSchema().load(request.json)
     print(new_movie)
+       
     movie = Movie(
         title = new_movie['title'],
         genre = new_movie['genre'],
         length = new_movie['length'],
         year = new_movie['year'],
-        director_id = new_movie.get('director', 6)
+        director_id = new_movie['director_id']
      )
+    '''
+    movie = Movie()
+    movie.title = new_movie['title']
+    movie.genre = new_movie['genre']
+    movie.length = new_movie['length']
+    movie.year = new_movie['year']
+    movie.director_id = new_movie['director_id']
+    ''' 
+
+
     db.session.add(movie)
     db.session.commit()
     print(f'New movie "{movie.title}" added to database')

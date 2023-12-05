@@ -1,5 +1,7 @@
+# JWT Identity and expiry held here
+
 from flask import Blueprint, request
-from models.users import User
+from models.user import User
 from schemas.user_schema import *
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
@@ -26,7 +28,7 @@ def signup():
             db.session.add(user)
             db.session.commit()
 
-            token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 100))
+            token = create_access_token(identity=user.id, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 100))
             # Return JWT / user   
             return {'token' : token, 'user' : user_schema_private.dump(user)}, 201
     except IntegrityError:
@@ -42,7 +44,7 @@ def signin():
     user = db.session.scalar(stmt)
 
     if user and bcrypt.check_password_hash(user.password, current_user['password']):
-        token = create_access_token(identity=user.username, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 100))
+        token = create_access_token(identity=user.id, additional_claims={'id': user.id}, expires_delta = timedelta(hours = 100))
         return {'token' : token, 'user' : user_schema_private.dump(user)}, 200
     else:
         return {'error' : 'Username or password is incorrect'}, 409

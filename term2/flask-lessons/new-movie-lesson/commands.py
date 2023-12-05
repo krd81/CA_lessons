@@ -1,11 +1,11 @@
 from main import db
 from flask import Blueprint
 from main import bcrypt
-from models.movies import Movie
-from models.actors import Actor
-from models.directors import Director
-from models.users import User
-from models.reviews import Review
+from models.movie import Movie
+from models.actor import Actor
+from models.director import Director
+from models.user import User
+from models.review import Review
 from datetime import date
 
 db_commands = Blueprint("db", __name__)
@@ -36,6 +36,11 @@ def db_seed():
             name = "James Cameron",
             country = "Canada"
         ),
+        Director(
+            name = "Olivia Wilde",
+            country = "UK"
+        ),
+
     ]
 
     db.session.add_all(directors)
