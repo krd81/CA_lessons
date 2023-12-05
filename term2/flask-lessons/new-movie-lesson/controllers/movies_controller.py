@@ -4,6 +4,7 @@ from models.movie import Movie
 from schemas.movie_schema import *
 from flask_jwt_extended import jwt_required
 from controllers.reviews_controller import reviews
+from controllers.cast_controller import cast
 
 
 movies = Blueprint('movies', __name__, url_prefix='/movies')
@@ -48,15 +49,6 @@ def add_movie():
         year = new_movie['year'],
         director_id = new_movie['director_id']
      )
-    '''
-    movie = Movie()
-    movie.title = new_movie['title']
-    movie.genre = new_movie['genre']
-    movie.length = new_movie['length']
-    movie.year = new_movie['year']
-    movie.director_id = new_movie['director_id']
-    ''' 
-
 
     db.session.add(movie)
     db.session.commit()
@@ -103,5 +95,5 @@ def delete_movie(movie_id):
         return {}, 200
 
 movies.register_blueprint(reviews)
-
+movies.register_blueprint(cast)
 

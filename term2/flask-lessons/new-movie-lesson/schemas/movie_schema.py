@@ -3,11 +3,12 @@ from marshmallow import fields
 
 
 class MovieSchema(ma.Schema):
-    director = fields.Nested('DirectorSchema', only=['name']) 
-  
+    director = fields.Nested('DirectorSchema', only=['name'])   
     reviews = fields.Nested('ReviewSchema', many=True, only=['user', 'message'])
+    cast = fields.Nested('CastSchema', many=True, exclude=['movie_id'])
+
     class Meta:
-        fields = ('id', 'title', 'genre', 'length', 'year', 'director_id', 'reviews')
+        fields = ('id', 'title', 'genre', 'length', 'year', 'director_id', 'cast', 'reviews')
 
 
 

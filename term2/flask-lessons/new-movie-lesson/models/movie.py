@@ -15,3 +15,5 @@ class Movie(db.Model):
 
     reviews = db.relationship('Review', back_populates='movie')
 
+    cast = db.relationship('Cast', back_populates='movie')
+

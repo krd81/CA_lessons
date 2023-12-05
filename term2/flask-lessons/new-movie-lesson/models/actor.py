@@ -11,5 +11,7 @@ class Actor(db.Model):
     country = db.Column(db.String(50))
     dob = db.Column(db.Date())
 
+    cast = db.relationship('Cast', back_populates='actors')
+
 
 
