@@ -298,4 +298,4 @@ def db_seed():
     db.session.commit()
 
 
-    print("Database seeded")
+   	
