@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Toilets</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.2.0/papaparse.js"></script>
+    <style>
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+            padding: 0
+
+        }
+
+        h1 {
+			margin-left: 10px;
+			margin-bottom: 20px;
+		}
+		.suburb {
+            font-size: 16px;
+			margin-left: 20px;
+			margin-bottom: 10px;
+        }
+        .toilet {
+            margin: 10px;
+        }
+        .address {
+            margin-left: 10px;
+            margin-bottom: 20px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <!-- Do your HTML elements here -->
+    <h1>Public Toilets in Australia</h1>
+    <div id="content"></div>
+
+
+    <script>
+        let contentDiv = document.getElementById("content")
+        
+        function displayData(data) {
+            // Your code here to display data on the page
+            for(let toilet of data){
+                let toiletDiv = document.createElement("div")
+                toiletDiv.classList.add("toilet")
+                let nameLink = document.createElement("a")
+                nameLink.innerHTML = `<a href="${toilet.URL}">${toilet.Name}</a>`
+                let addressDiv = document.createElement("div")
+                addressDiv.classList.add("address")
+                addressDiv.innerHTML = `<p>${toilet.Address1}</p><p>${toilet.Town}</p><p>${toilet.State}</p>`
+                toiletDiv.appendChild(nameLink)
+                toiletDiv.appendChild(addressDiv)
+                contentDiv.appendChild(toiletDiv)
+            }    
+        }
+
+        function arrangeDataBySuburb(data) {
+            // You can use this function to implement the bonus challenge
+            let dataBySuburb = {}
+            data.forEach((toilet) => {
+                let suburb = toilet.Town
+                let entry = {name: toilet.Name, address: toilet.Address1, suburb: toilet.Town, state: toilet.State, link: toilet.URL}
+                dataBySuburb.hasOwnProperty(suburb)
+                    ? dataBySuburb[suburb].push(entry)
+                    : dataBySuburb[suburb] = [entry]
+            })
+            return dataBySuburb
+        }
+
+        function displayDataBySuburb(data) {
+            // You can use this function to implement the bonus challenge
+            const toiletsBySuburb = arrangeDataBySuburb(data)
+
+            Object.entries(toiletsBySuburb).forEach(([suburb, toilets]) => {
+                let suburbDiv = document.createElement("div")
+                suburbDiv.classList.add("suburb")
+                let suburbH = document.createElement("h2")
+                suburbH.textContent = suburb
+                suburbDiv.appendChild(suburbH)
+                toilets.forEach((toilet) => {
+
+                    let toiletDiv = document.createElement("div")
+                    toiletDiv.classList.add("toilet")
+                    let nameLink = document.createElement("a")
+                    nameLink.innerHTML = `<a href="${toilet.link}">${toilet.name}</a>`
+                    let addressDiv = document.createElement("div")
+                    addressDiv.classList.add("address")
+                    addressDiv.innerHTML = `<p>${toilet.address}</p><p>${toilet.suburb}</p><p>${toilet.state}</p>`
+                    toiletDiv.appendChild(nameLink)
+                    toiletDiv.appendChild(addressDiv)
+                    suburbDiv.appendChild(toiletDiv)                    
+                })
+                contentDiv.appendChild(suburbDiv)
+            })
+        }
+
+        Papa.parse("https://data.gov.au/data/dataset/553b3049-2b8b-46a2-95e6-640d7986a8c1/resource/34076296-6692-4e30-b627-67b7c4eb1027/download/toiletmapexport_200702_111356.csv", {
+            download: true,
+            header: true,
+            complete: function (results) {
+                // To see the data that a public toilet has in this API, 
+                // check the browser console!
+                console.log(results.data[1]);
+            
+                // implement your solution in the displayData function
+                // displayData(results.data);
+
+                // bonus
+                displayDataBySuburb(results.data);
+              
+            }
+        });
+
+    </script>
+</body>
+
+</html>
