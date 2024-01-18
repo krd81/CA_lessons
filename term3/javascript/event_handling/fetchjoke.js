@@ -6,7 +6,8 @@ function fetchJoke(){
         }
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    // .then(data => console.log(data))
 }
 
-fetchJoke()
+// Adding .then here means we are obtaining the promise and customising the response
+fetchJoke().then(joke => console.log(joke))
