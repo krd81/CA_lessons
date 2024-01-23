@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            display:grid ;
+            justify-content: center;
+            
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: larger;
+        }
+        img{
+            border: solid black;
+            border-radius: 5%;
+            margin-top: 10vh;
+        }
+        h2{
+            color: darkorange;            
+        }
+        ul{
+            margin-bottom: 1vh;
+        }
+        button{
+            margin-top: 5vh
+        }
+        
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Encounter</title>
+</head>
+<body>
+    <div class="pokemonImage">
+        <img src="" alt="The image or sprite of the Pokemon you encountered!"/>
+    </div>
+    <div class="pokemonName"></div>
+    <div class="pokemonType1"></div>
+    <div class="pokemonType2"></div>
+
+    <button id="create-encounter">Encounter a Pokemon!</button>
+
+    <script>
+        function getRandomNumberForPokeAPI(){
+            // The "808" is just a safe maximum for how many Pokemon are currently in the API.
+            // When they add more Pokemon, that number should go up.
+            let suitableNumber = Math.floor(Math.random() * 808)
+            return suitableNumber
+        }
+
+        function showPokemonData(data) {
+            console.log(data)
+            // 3. Display the data on the webpage as indicated in the description
+            /*
+            TO DO:
+            - Create objects for the html containers
+            - Access the relevant attributes of the Pokemon
+            - Add Styling to page
+            */
+
+            let img = document.querySelector("img")
+            let name_div = document.getElementsByClassName("pokemonName")
+            let type_div_1 = document.getElementsByClassName("pokemonType1")
+            let type_div_2 = document.getElementsByClassName("pokemonType2")
+            
+
+
+            img.src = data.sprites.front_default
+            img.alt = ""
+            
+            for (let div of name_div){
+                let p = document.createElement("h2")
+                
+                p.textContent = capitalise(data.name)
+                div.append(p)
+            }
+
+            let types = data.types
+            let type_header = document.createElement("h3")
+            let list = document.createElement("ul")
+
+
+
+            for (let div of type_div_1){
+                type_header.textContent = "Type:"
+                let li = document.createElement("li")
+                li.textContent = capitalise(types[0].type.name)
+                div.append(type_header, list, li)
+            }
+
+            if (types.length > 1) {
+                for (let div of type_div_2){
+                    type_header.textContent = "Types:"
+                    let li = document.createElement("li")
+                    li.textContent = capitalise(types[1].type.name)
+                    div.append(li)
+                }
+            }
+
+        }
+
+        function capitalise(text){
+            length = text.length
+            let firstLetter = text[0].toUpperCase()
+            let newText = firstLetter + text.slice(1, text.length)
+            return newText
+        }
+        
+        function getPokemonData(){
+            // 1. update with the correct url for POKEAPI:
+            const POKEAPI = "https://pokeapi.co/api/v2/pokemon/"
+            // 2. use fetch to call the API
+            // and call showPokemonData with the data returned from the fetch
+            fetch(POKEAPI+getRandomNumberForPokeAPI(), {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(body => body.json())
+                .then(data => showPokemonData(data))
+        }
+
+        
+        // 4. Add the event listener to the button, so that clicking the button
+        //    triggers a call to getPokemonData to display a new Pokemon
+        let btn = document.getElementById("create-encounter")
+        btn.addEventListener("click", () => {
+            // for (let i=0; i < 2; i++){
+                getPokemonData()
+            // }
+        })
+
+
+    </script>
+</body>
+</html>
