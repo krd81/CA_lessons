@@ -33,7 +33,8 @@ const categoriesSchema = new mongoose.Schema({
 const CategoryModel = mongoose.model('Category', categoriesSchema)
 
 const entriesSchema = new mongoose.Schema({
-    category : {type: String, required: true},
+    // category : {type: String, required: true},
+    category : {type: mongoose.ObjectId, ref: 'Category'},
     content: {type: String, required: true}
 })
 
