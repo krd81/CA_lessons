@@ -5,17 +5,52 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+
+
+body{
+  background-color: whitesmoke;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+
+.todo-item{
+  display: flex;
+  /* justify-content: flex-start;
+  align-items: center; */
+  padding: 30px 20px 0;
+  width: 70%;
+  border-bottom: 1px solid #cecece;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: 100;
+  font-size: 15px;
+  color: #333333;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.todo-list{
+  background-color: white;
+  margin: auto;
+  /* width: 50%; */
+  display: block;
+  flex-direction: columm;
+  align-items: center;
+  border: 1px solid #efefef;
+  padding: 30px;
+  box-shadow: 
+      0 1px 1px rgba(0,0,0,0.15),
+      0 10px 0 -5px #eee,
+      0 10px 1px -4px rgba(0,0,0,0.15),
+      0 20px 0 -10px #eee,
+      0 20px 1px -9px rgba(0,0,0,0.15);
+
+}
+
+
+input[type=checkbox]{
+  margin-right: 10px;
+  font-size: 30px;
+}
+
+input[type=checkbox]:focus {
+  outline: 0;
 }
 
 @keyframes logo-spin {
