@@ -4,8 +4,8 @@ import BitcoinIndex from './BitcoinIndex'
 const App = () => {
   return (
     <>
-    <h1>Bitcoin Index</h1>
-    <BitcoinIndex />
+    <h1>Bitcoin Index...</h1>
+    <BitcoinIndex currency="EUR" />
     </>
   )
 }
