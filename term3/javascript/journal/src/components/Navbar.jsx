@@ -14,7 +14,9 @@ const Navbar = () => {
 
         <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
+        <Link to="/" className="navbar-item">
             <h1>Journal</h1>
+        </Link>
             <a role="button" onClick={toggeleHamburger} className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -29,12 +31,9 @@ const Navbar = () => {
             </Link>
 
             <Link to="/category" className="navbar-item">
-                Select Category
+                Create New Entry
             </Link>
 
-            <Link to="/entry/new" className="navbar-item">
-                New Entry
-            </Link>
             </div>
 
         </div>
