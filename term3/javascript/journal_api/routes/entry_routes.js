@@ -3,8 +3,10 @@ import { EntryModel } from '../db.js'
 
 const router = Router()
 
+// GET all entries
 router.get('/', async (req, res) => res.send(await EntryModel.find().populate('category')))
 
+// GET one entry
 router.get('/:id', async (req, res) => {
     // const entry = await EntryModel.findOne({_id: req.params.id})
     const entry = await EntryModel.findById(req.params.id).populate('category')
@@ -15,32 +17,19 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+
+// POST ROUTE
 router.post('/', async (req, res) => {
-    try{
-        const insertedEntry = await EntryModel.create(req.body)
+    try {
+        const insertedEntry = await (await EntryModel.create(req.body)).populate('category')
         res.status(201).send(insertedEntry)
     }
     catch (err) {
-        res.status(500).send({error: err.message})
+        res.status(500).send({ error: err.message })
     }
 })
 
-// Alternative POST route - where category name is received instead of id
-router.post('/', async (req, res) => {
-    try{
-        const cat = await CategoryModel.findOne({ name: req.body.category })
-        if (cat){
-            req.body.category = cat._id
-            const insertedEntry = await (await EntryModel.create(req.body)).populate('category')
-            res.status(201).send(insertedEntry)
-        } else {
-            res.status(404).send({error: 'Category not found'})
-        }
-    }
-    catch (err) {
-        res.status(500).send({error: err.message})
-    }
-})
+
 
 // UPDATE route
 router.put('/:id', async (req, res) => {
