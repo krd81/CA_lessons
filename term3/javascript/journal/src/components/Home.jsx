@@ -1,14 +1,20 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import Navbar from './Navbar'
+import { Link } from 'react-router-dom'
 
 
-const Home = () => {
-    const params = useParams()
 
-
+const Home = ({ entries=[] }) => {
   return (
-    <div>Home</div>
+    <>
+      <h3>Journal Entries</h3>
+        <ul>
+            {entries.map((entry, index) => (
+              <li key={index}>
+                <Link to={`/entry/${index}`}>{entry.content}</Link>
+              </li>
+              ))}
+        </ul>
+    </>
   )
 }
 

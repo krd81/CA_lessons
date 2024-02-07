@@ -1,9 +1,11 @@
 import express from 'express'
 import { CategoryModel } from './db.js'
 import entryRoutes from "./routes/entry_routes.js"
-
+import cors from 'cors'
 
 const app = express()
+// The cors middleware manages the access to ports 
+app.use(cors())
 
 // This is middleware that performs the action of checking each incoming object
 // If the header type is application/json and there is content in the body(??)

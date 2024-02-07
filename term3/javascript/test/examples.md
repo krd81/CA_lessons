@@ -20,3 +20,45 @@ while (count < 10) {
     count ++
 }
 ```
+
+### Q8
+```
+let num = 5 // num is type Number
+num = "five" // num is type String
+num = false // num is type Boolean
+```
+
+```
+let a = 2 // a is type Number
+let b = "5" // b is type String
+let c = a + b // c is type String
+```
+
+> MozDevNet (no date c) Type coercion - MDN web docs glossary: Definitions of web-related terms: MDN, MDN Web Docs. Available at: https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion (Accessed: 05 February 2024).
+
+### Q9
+String: `let name = 'Sally'`
+Number:
+```
+let a = 10
+let b = 3
+let c = a * b
+```
+BigInt: `let largeNumber = BigInt("9007199254741000")`
+
+Boolean:
+```
+let score = prompt("Enter your test result: ")
+let pass = false
+
+if (score > 49 ){
+    pass = true
+}
+return pass
+
+```
+
+Q9 citations:
+(No date) JavaScript data types. Available at: https://www.w3schools.com/js/js_datatypes.asp (Accessed: 05 February 2024).
+MozDevNet (no date a) BigInt - javascript: MDN, MDN Web Docs. Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt (Accessed: 05 February 2024).
+MozDevNet (no date b) Number - javascript: MDN, MDN Web Docs. Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number (Accessed: 05 February 2024).
