@@ -43,3 +43,9 @@ h1, h2 {
 .card {
   margin: 2vw
 }
+
+.subtitle.is-7 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 2rem;
+  color:dodgerblue;
+}

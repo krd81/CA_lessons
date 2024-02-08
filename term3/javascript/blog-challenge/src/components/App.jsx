@@ -18,14 +18,15 @@ function App() {
   }, [])
 
 
-  function allArticles (id, title, content_text, user_id, photo_url, category) {
+  function allArticles (id, title, content_text, user_id, photo_url, category, created_at) {
     const newArticle = {
       id: id,
       title: title,
       content_text: content_text,
       user_id: user_id,
       photo_url: photo_url,
-      category: category
+      category: category,
+      created_at: created_at
     }
     setArticles([...articles, newArticle])
   }

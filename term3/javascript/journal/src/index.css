@@ -9,10 +9,28 @@ ul {
   list-style-type: circle;
   color: blue ;
   font-size: larger;
-  line-height: 13vh;
+  line-height:normal;
+}
+
+li {
+  margin-top: 1rem;
 }
 
 h3 {
   font-size: larger;
   margin-left: 1vw;
 }
+
+body {
+  margin: 2vw;
+}
+
+nav {
+  position: fixed;
+  margin: 0px;
+}
+
+.section {
+  padding: 1rem
+}
+

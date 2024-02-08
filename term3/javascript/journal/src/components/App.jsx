@@ -68,7 +68,7 @@ const App = () => {
     <>
     <BrowserRouter>
     <NavBar />
-      <Routes>
+      <Routes >
         <Route path='/' element={<Home entries={entries}/>} />
         <Route path='/category' element={<CategorySelection categories={categories}/>}/>
         <Route path='/entry'>

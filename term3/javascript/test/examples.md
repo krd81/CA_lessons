@@ -46,8 +46,9 @@ let c = a * b
 ```
 BigInt: `let largeNumber = BigInt("9007199254741000")`
 
-Boolean:
 ```
+Boolean:
+
 let score = prompt("Enter your test result: ")
 let pass = false
 
@@ -58,7 +59,22 @@ return pass
 
 ```
 
+```
+Error example:
+
+let age = prompt("Enter your age: ")
+
+try {
+    if (typeof (age) !== number) throw Error ('Age must be a number')
+
+} catch (error) {
+    console.log(error.message)
+}
+```
+
 Q9 citations:
 (No date) JavaScript data types. Available at: https://www.w3schools.com/js/js_datatypes.asp (Accessed: 05 February 2024).
 MozDevNet (no date a) BigInt - javascript: MDN, MDN Web Docs. Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt (Accessed: 05 February 2024).
 MozDevNet (no date b) Number - javascript: MDN, MDN Web Docs. Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number (Accessed: 05 February 2024).
+(No date a) JavaScript sets. Available at: https://www.w3schools.com/js/js_sets.asp (Accessed: 08 February 2024).
+MozDevNet (no date b) Date - javascript: MDN, MDN Web Docs. Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date (Accessed: 08 February 2024).
