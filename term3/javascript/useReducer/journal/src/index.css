@@ -1,0 +1,36 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+h1 {
+  font-size: 2rem;
+}
+
+ul {
+  margin-left: 3vw;
+  list-style-type: circle;
+  color: blue ;
+  font-size: larger;
+  line-height:normal;
+}
+
+li {
+  margin-top: 1rem;
+}
+
+h3 {
+  font-size: larger;
+  margin-left: 1vw;
+}
+
+body {
+  margin: 2vw;
+}
+
+nav {
+  position: fixed;
+  margin: 0px;
+}
+
+.section {
+  padding: 1rem
+}
+

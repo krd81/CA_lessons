@@ -32,7 +32,6 @@ router.post('/', async (req, res) => {
 
 
 // UPDATE route
-// TODO: Check if applicants is being updated - if so, new applicants need to be added to the array
 router.put('/:id', async (req, res) => {
     try{
         const updatedEntry = await EntryModel.findByIdAndUpdate(req.params.id, req.body, {new : true})
